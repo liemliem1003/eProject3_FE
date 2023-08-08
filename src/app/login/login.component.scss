@@ -1,60 +1,54 @@
+@import '../../assets/general.scss';
+
 body {
     background-color: #E6F2FF;
-    font-family: Arial, sans-serif;
-  }
-  
-  .container {
+    font-family: $fontFamily;
+    
+}
+
+.container {
     max-width: 400px;
     margin: 0 auto;
     padding: 20px;
     background-color: #FFFFFF;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  h1 {
+}
+
+h2 {
     text-align: center;
-    color: #0047B3;
-  }
-  
-  form {
+    color: $header;
+}
+
+form {
     margin-top: 20px;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 5px;
-    color: #0047B3;
-  }
-  
-  input[type="text"],
-  input[type="password"] {
+}
+
+label {
+    @extend .lable-input
+}
+
+input[type="text"],
+input[type="password"] {
     width: 100%;
     padding: 10px 0px 10px 10px;
     margin-bottom: 20px;
     border: 1px solid #CCCCCC;
     border-radius: 4px;
-  }
-  
-  .button-container {
+}
+
+.button-container {
     display: flex;
     justify-content: space-between;
-  }
-  
-  button {
-    background-color: #0047B3;
-    color: #FFFFFF;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  a {
+}
+
+
+
+a {
     color: #0047B3;
     text-decoration: none;
-  }
-  
-  a:hover {
+}
+
+a:hover {
     text-decoration: underline;
-  }
+}

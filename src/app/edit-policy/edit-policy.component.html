@@ -1,0 +1,50 @@
+<div class="container">
+    <h2>Edit Policy Details</h2>
+    <form>
+        <div class="form-group">
+            <label for="name">Policy Name</label>
+            <input type="text" class="form-control" #name name="name" required placeholder="Input Policy name">
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" #description rows="5"
+                placeholder="Type Policy description here..."></textarea>
+        </div>
+        <div class="form-group">
+            <label for="totalamount">Total Amount</label>
+            <input type="number" class="form-control" #totalamount name="totalamount" min="100000000" required
+                placeholder="At least 100,000,000">
+        </div>
+        <div class="form-group">
+            <label for="insurer">Select Insurer</label>
+            <select class="form-control" #insurer name="duration" required>
+                <option>-- Select an option --</option>
+                <option value="1">Bao Viet</option>
+                <option value="2">Bao Minh</option>
+                <option value="3">PVI</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="duration">Select Duration</label>
+            <select class="form-control" #duration name="duration" required>
+                <option>-- Select an option --</option>
+                <option value="1">1 Year</option>
+                <option value="2">2 Years</option>
+                <option value="3">3 Years</option>
+            </select>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label" for="active">Available</label>
+            <input type="checkbox" class="form-check-input" #active name="active" checked>
+        </div>
+        <div class="form-group">
+            <label for="banner">Banner</label>
+            <input type="file" class="form-control-file" #banner name="file" required placeholder="Select Banner">
+        </div>
+
+        <div class="btn-group">
+            <button type="submit" class="btn btn-adding">Add Insurer</button>
+            <button type="button" class="btn cancel">Cancel</button>
+        </div>
+    </form>
+</div>

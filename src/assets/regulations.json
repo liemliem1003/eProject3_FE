@@ -1,0 +1,14 @@
+{
+    "role":[
+        "ADMIN",
+        "CEO",
+        "MANAGER",
+        "WORKER"
+    ],
+    "color":{
+        "buttonBackground": "lightblue",
+        "buttonText": "#0d00ff",
+        "header": "#04AA6D",
+        "footer": "#D3E0DC"
+    }
+}

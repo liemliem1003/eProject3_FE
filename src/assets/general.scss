@@ -1,0 +1,50 @@
+$buttonBackground: lightblue;
+$buttonText: #0d00ff;
+$header: #02ff03;
+$footer: #D3E0DC;
+$fontFamily: Arial, sans-serif;
+
+html,
+body {
+    height: 100%;
+    padding: 0;
+}
+button {
+    flex:1;
+    background-color: $buttonBackground;
+    color: $buttonText;
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+}
+button:hover{
+    background-color: #0047B3;
+    color: white;
+}
+.lable-input{
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    color: #0047B3;
+}
+.lable-header-adding{
+    text-align: center;
+    color: $header;
+}
+.btn-group{
+    display: flex;
+}
+.cancel:hover{
+    font-weight: bold;
+}
+.cancel{
+    flex: 1;
+    display: block;
+    margin-left: 10px;
+    font-size: 12px;
+    font-weight: 100;
+    color: black;
+    background-color: #c2c2c2;
+}
