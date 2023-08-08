@@ -11,6 +11,7 @@ import { AddPolicyComponent } from './add-policy/add-policy.component';
 import { EditPolicyComponent } from './edit-policy/edit-policy.component';
 import { EditEmployeeComponent } from './edit-employee/edit-employee.component';
 import { EditCompanyComponent } from './edit-company/edit-company.component';
+import { ShowCompanyComponent } from './show-company/show-company.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { EditCompanyComponent } from './edit-company/edit-company.component';
     AddPolicyComponent,
     EditPolicyComponent,
     EditEmployeeComponent,
-    EditCompanyComponent
+    EditCompanyComponent,
+    ShowCompanyComponent,
   ],
   imports: [
     BrowserModule,

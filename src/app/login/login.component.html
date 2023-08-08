@@ -6,11 +6,11 @@
         <input type="text" class="form-control" #username placeholder="Input username">
       </div>
       <div class="form-group">
-        <label for="password">Passowrd</label>
+        <label for="password">Password</label>
         <input type="password" class="form-control" #password placeholder="Input password">
       </div>
       <div class="button-container">
-        <button type="submit" class="btn btn-primary" id="loginButton">Sign In</button>
+        <button (click)="Login(username.value,password.value)" type="submit" class="btn btn-primary" #loginButton>Sign In</button>
         <a href="#" class="btn btn-link" id="forgotPassword">Forget password?</a>
       </div>
     </form>

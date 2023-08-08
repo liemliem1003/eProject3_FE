@@ -7,8 +7,12 @@ import { AddEmployeeComponent } from './add-employee/add-employee.component';
 import { EditEmployeeComponent } from './edit-employee/edit-employee.component';
 import { AddPolicyComponent } from './add-policy/add-policy.component';
 import { EditPolicyComponent } from './edit-policy/edit-policy.component';
+import { ShowCompanyComponent } from './show-company/show-company.component';
 
-var login = true;
+var login = localStorage.getItem("dataLogin")!=null?true:false;
+var dataLogin = JSON.parse(localStorage.getItem("dataLogin") || "{}");
+console.log(dataLogin);
+
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -18,10 +22,11 @@ const routes: Routes = [
   { path: 'editemployee', component: EditEmployeeComponent },
   { path: 'addpolicy', component: AddPolicyComponent },
   { path: 'editpolicy', component: EditPolicyComponent },
+  { path: 'showcompany', component: ShowCompanyComponent },
   { path: '**', redirectTo: '/login', pathMatch: 'full' },
 
 ];
-
+// xét 3 trường hợp ở @NgModule({ nếu chưa login, login vào là role nào thì hiện cái gì
 const routes2: Routes = [
   { path: 'login', component: LoginComponent },
   { path: '**', redirectTo: '/login', pathMatch: 'full' },

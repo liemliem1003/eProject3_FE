@@ -9,18 +9,29 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   dataJS_color: any;
-
+  data: any;
   constructor(private apiService: ApiService, private router: Router) { }
 
   ngOnInit(): void {
-    this.apiService.getJSON().subscribe(data => {
-      this.dataJS_color = data.color
-      console.log(data.color);
-      
-    });
+
   }
-  Login(username:any, password:any){
-
-
+  Login(username: any, password: any) {
+    if (username == '') {
+      alert("Username cannot be blank")
+    } else if (password == '') {
+      alert("Password cannot be blank")
+    } else {
+      this.apiService.getLogin(username, password).then((data: any) => {
+        if (data!=null) {
+          this.data = data;
+          data = JSON.stringify(data);
+          localStorage.setItem("dataLogin", data);
+          console.log(data);
+        }else{
+          alert("Username or Password is incorrect!!!")
+        }
+      })
+    }
+    return false
   }
 }

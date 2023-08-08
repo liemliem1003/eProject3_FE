@@ -1,48 +1,46 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
     providedIn: 'root',
 })
 export class ApiService {
     private apiUrl = 'http://localhost:3000/api';
+    private httpOptions = {
+        headers: new HttpHeaders({
+            'Content-Type': 'application/json'
+        })
+    };
     constructor(private http: HttpClient) { }
 
     getJSON() {
         console.log(this.http.get<any>('assets/regulations.json'));
-        
+
         return this.http.get<any>('assets/regulations.json')
     }
 
-    getAllEmployees(limit:any,page:any,id:any,name:any,role:any,email:any) {
+    getAllEmployees(limit: any, page: any, id: any, name: any, role: any, email: any) {
         var query = `${this.apiUrl}/employees?limit=${limit}&page=${page}`
 
-        if(id!=undefined && id!=''){
-            query+=`&employeeid=${id}`
+        if (id != undefined && id != '') {
+            query += `&employeeid=${id}`
         }
-        if(name!=undefined && name!=''){
-            query+=`&name=${name}`
+        if (name != undefined && name != '') {
+            query += `&name=${name}`
         }
-        if(role!=undefined && role!=''){
-            query+=`&role=${role}`
+        if (role != undefined && role != '') {
+            query += `&role=${role}`
         }
-        if(email!=undefined && email!=''){
-            query+=`&email=${email}`
+        if (email != undefined && email != '') {
+            query += `&email=${email}`
         }
-        
+
         return this.http.get(query)
     }
 
     getLogin(username: any, password: any) {
-        return new Promise((resolve, reject) => {
-            this.http.get(`${this.apiUrl}/employees/login?username=${username}&pass=${password}`)
-                .subscribe((data: any) => {
-                    resolve(data);
-                },
-                    (error) => {
-                        reject(error);
-                    })
-        })
+        var api = `${this.apiUrl}/Users/login?username=${username}&password=${password}`;
+        return this.http.get<any>(api).toPromise();
     }
 
     getEmployeeByID(id: any) {
@@ -57,15 +55,15 @@ export class ApiService {
         })
     }
 
-    putUpdateEmployee(id:any,name:any,email:any,role:any,status:any){
+    putUpdateEmployee(id: any, name: any, email: any, role: any, status: any) {
         return new Promise((resolve, reject) => {
-            this.http.put(`${this.apiUrl}/employee/update?id=${id}&email=${email}&name=${name}&role=${role}&status=${status}`,{})
-            .subscribe((data: any) => {
-                resolve(data);
-            },
-                (error) => {
-                    reject(error);
-                })
+            this.http.put(`${this.apiUrl}/employee/update?id=${id}&email=${email}&name=${name}&role=${role}&status=${status}`, {})
+                .subscribe((data: any) => {
+                    resolve(data);
+                },
+                    (error) => {
+                        reject(error);
+                    })
         })
     }
 }
