@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
           this.data = data;
           data = JSON.stringify(data);
           localStorage.setItem("dataLogin", data);
-          console.log(data);
+          this.router.navigate(['/showcompany'])
         }else{
           alert("Username or Password is incorrect!!!")
         }

@@ -11,7 +11,6 @@ import { ShowCompanyComponent } from './show-company/show-company.component';
 
 var login = localStorage.getItem("dataLogin")!=null?true:false;
 var dataLogin = JSON.parse(localStorage.getItem("dataLogin") || "{}");
-console.log(dataLogin);
 
 
 const routes: Routes = [

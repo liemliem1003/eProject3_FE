@@ -19,24 +19,33 @@ export class ApiService {
         return this.http.get<any>('assets/regulations.json')
     }
 
-    getAllEmployees(limit: any, page: any, id: any, name: any, role: any, email: any) {
-        var query = `${this.apiUrl}/employees?limit=${limit}&page=${page}`
-
-        if (id != undefined && id != '') {
-            query += `&employeeid=${id}`
-        }
-        if (name != undefined && name != '') {
-            query += `&name=${name}`
-        }
-        if (role != undefined && role != '') {
-            query += `&role=${role}`
-        }
-        if (email != undefined && email != '') {
-            query += `&email=${email}`
-        }
-
-        return this.http.get(query)
+    postCreateCompany(companyName:any,companyPhone:any,address:any,logo:any,url:any,status:any){
+        var api = `${this.apiUrl}/Company/create`
+        var body ={
+            companyName: companyName,
+            companyPhone: companyPhone,
+            address: address,
+            logo: logo,
+            url: url,
+            status: status
+          }
+          var JSbody = JSON.stringify(body)
+          console.log(JSbody);
+          
+        return new Promise((resolve, reject) => {
+            this.http.post(api, JSbody, this.httpOptions)
+                .subscribe((data: any) => {
+                    resolve(data);
+                },
+                    (error) => {
+                        reject(error);
+                    })
+        }) 
     }
+
+
+
+
 
     getLogin(username: any, password: any) {
         var api = `${this.apiUrl}/Users/login?username=${username}&password=${password}`;
@@ -55,15 +64,15 @@ export class ApiService {
         })
     }
 
-    putUpdateEmployee(id: any, name: any, email: any, role: any, status: any) {
-        return new Promise((resolve, reject) => {
-            this.http.put(`${this.apiUrl}/employee/update?id=${id}&email=${email}&name=${name}&role=${role}&status=${status}`, {})
-                .subscribe((data: any) => {
-                    resolve(data);
-                },
-                    (error) => {
-                        reject(error);
-                    })
-        })
-    }
+//     putUpdateEmployee(id: any, name: any, email: any, role: any, status: any) {
+//         return new Promise((resolve, reject) => {
+//             this.http.put(`${this.apiUrl}/employee/update?id=${id}&email=${email}&name=${name}&role=${role}&status=${status}`, {})
+//                 .subscribe((data: any) => {
+//                     resolve(data);
+//                 },
+//                     (error) => {
+//                         reject(error);
+//                     })
+//         })
+//     }
 }
