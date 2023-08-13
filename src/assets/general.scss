@@ -48,3 +48,32 @@ button:hover{
     color: black;
     background-color: #c2c2c2;
 }
+.table {
+    font-size: 14px; /* Kích thước chữ cho bảng */
+  }
+
+  .table th,
+  .table td {
+    vertical-align: middle; /* Canh giữa nội dung của th và td */
+  }
+
+  .table img {
+    max-width: 50px; /* Giới hạn kích thước ảnh logo */
+    height: auto;
+  }
+
+  .table thead th {
+    background-color: #f8f9fa; /* Màu nền cho header */
+  }
+
+  .table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f8f9fa; /* Màu nền xen kẽ cho dòng chẵn */
+  }
+
+  .table-striped tbody tr:hover {
+    background-color: #e9ecef; /* Màu nền khi hover chuột */
+  }
+  button a{
+    width: 100%!important;
+    height: 100%!important;
+  }

@@ -14,6 +14,7 @@ import { EditCompanyComponent } from './edit-company/edit-company.component';
 import { ShowCompanyComponent } from './show-company/show-company.component';
 import { FormsModule }   from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     EditEmployeeComponent,
     EditCompanyComponent,
     ShowCompanyComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,17 @@
+@import '../../assets/general.scss';
+.navbar{
+    background-color: #acff82;
+}
+.nav-item{
+    padding: 15px 40px!important;
+    text-decoration: none;
+    color: black;
+    transition: 0.3s;
+    font-size: 18px;
+    font-weight: bold;
+
+}
+.nav-item:hover{
+    background-color: #56ff00;
+    color: white;
+}

@@ -1,0 +1,26 @@
+<ng-container *ngIf="login; else notLoggedIn">
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#">
+            <img src="assets/imgs/logo.png" alt="Logo" height="30">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="navbar-nav mx-auto">
+                <a class="nav-item nav-link" >Home</a>
+                <a class="nav-item nav-link" href="#">Employee</a>
+                <a class="nav-item nav-link" href="#">Policy</a>
+                <a class="nav-item nav-link" routerLink="/showcompany">Company</a>
+            </div>
+        </div>
+    </nav>
+</ng-container>
+<ng-template #notLoggedIn>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand mx-auto" href="#">
+            <img src="assets/imgs/logo.png" alt="Logo" height="30">
+        </a>
+    </nav>
+</ng-template>

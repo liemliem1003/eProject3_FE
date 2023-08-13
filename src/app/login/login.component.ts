@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   constructor(private apiService: ApiService, private router: Router) { }
 
   ngOnInit(): void {
-
+    this.router.navigate(['/showcompany'])
   }
   Login(username: any, password: any) {
     if (username == '') {
@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
           this.data = data;
           data = JSON.stringify(data);
           localStorage.setItem("dataLogin", data);
-          this.router.navigate(['/showcompany'])
+          window.location.reload();
         }else{
           alert("Username or Password is incorrect!!!")
         }

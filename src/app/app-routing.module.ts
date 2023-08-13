@@ -12,7 +12,6 @@ import { ShowCompanyComponent } from './show-company/show-company.component';
 var login = localStorage.getItem("dataLogin")!=null?true:false;
 var dataLogin = JSON.parse(localStorage.getItem("dataLogin") || "{}");
 
-
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'addcompany', component: AddCompanyComponent },
@@ -26,12 +25,6 @@ const routes: Routes = [
 
 ];
 // xét 3 trường hợp ở @NgModule({ nếu chưa login, login vào là role nào thì hiện cái gì
-const routes2: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: '**', redirectTo: '/login', pathMatch: 'full' },
-
-];
-
 
 @NgModule({
   imports: [RouterModule.forRoot(
