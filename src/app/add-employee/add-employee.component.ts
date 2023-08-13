@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../../../api.service'
+import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms'
 
 @Component({
   selector: 'app-add-employee',
@@ -7,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddEmployeeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private apiService: ApiService, private router: Router) {
+
+  }
 
   ngOnInit(): void {
   }
-
+  Cancel(){
+    if(window.confirm("Cancel?")){
+      this.router.navigate(['/showemployees'])
+    }
+  }
 }

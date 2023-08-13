@@ -1,36 +1,33 @@
 <div class="container">
     <h2>Add new Policy</h2>
-    <form>
+    <form [formGroup]="Form" (ngSubmit)="CreatePolicy(name.value,description.value,totalAmount.value,duration.value,companyId.value,active.checked)">
         <div class="form-group">
             <label for="name">Policy Name</label>
-            <input type="text" class="form-control" #name name="name" required placeholder="Input Policy name">
+            <input type="text" class="form-control {{Form.controls.name.status !== 'VALID' ? 'is-invalid' :'is-valid'}}" #name name="name" formControlName="name" placeholder="Input Policy name">
+            <div class="{{Form.controls.name.status !== 'VALID' ? 'invalid-feedback' :'valid-feedback'}}">{{Form.controls.name.status !== 'VALID' ? "Name can't be blank" : 'Look Good!!!'}}</div>
         </div>
         <div class="form-group">
             <label for="description">Description</label>
-            <textarea class="form-control" #description rows="5"
-                placeholder="Type Policy description here..."></textarea>
+            <textarea class="form-control {{Form.controls.description.status !== 'VALID' ? 'is-invalid' :'is-valid'}}" #description rows="5"
+                placeholder="Type Policy description here..." formControlName="description"></textarea>
+            <div class="{{Form.controls.description.status !== 'VALID' ? 'invalid-feedback' :'valid-feedback'}}">{{Form.controls.description.status !== 'VALID' ? "Description can't be blank" : 'Look Good!!!'}}</div>
         </div>
         <div class="form-group">
-            <label for="totalamount">Total Amount</label>
-            <input type="number" class="form-control" #totalamount name="totalamount" min="100000000" required
-                placeholder="At least 100,000,000">
+            <label for="totalAmount">Total Amount</label>
+            <select class="form-control" #totalAmount name="totalamount">
+                <option *ngFor="let amount of amountOption" value="{{amount}}">{{amount | number: '1.0-0'}}</option>
+            </select>
         </div>
         <div class="form-group">
-            <label for="insurer">Select Insurer</label>
-            <select class="form-control" #insurer name="duration" required>
-                <option>-- Select an option --</option>
-                <option value="1">Bao Viet</option>
-                <option value="2">Bao Minh</option>
-                <option value="3">PVI</option>
+            <label for="companyId">Select Insurer</label>
+            <select class="form-control" #companyId name="companyId" required>
+                <option *ngFor="let company of companies" value="{{company.companyId}}">{{company.companyName}}</option>
             </select>
         </div>
         <div class="form-group">
             <label for="duration">Select Duration</label>
             <select class="form-control" #duration name="duration" required>
-                <option>-- Select an option --</option>
-                <option value="1">1 Year</option>
-                <option value="2">2 Years</option>
-                <option value="3">3 Years</option>
+                <option *ngFor="let duration of durationOption" value="{{duration}}">{{duration}} Months</option>
             </select>
         </div>
         <div class="form-check">
@@ -39,12 +36,13 @@
         </div>
         <div class="form-group">
             <label for="banner">Banner</label>
-            <input type="file" class="form-control-file" #banner name="file" required placeholder="Select Banner">
+            <input type="file" class="form-control-file {{ Form.controls.banner.invalid ? 'is-invalid' : '' }}" #banner name="file" (change)="handleImageInput($event)" formControlName="banner" placeholder="Select Banner">
+            <div class="{{Form.controls.banner.status !== 'VALID' ? 'invalid-feedback' :'valid-feedback'}}">{{Form.controls.banner.status !== 'VALID' ? "Banner can't be blank" : 'Look Good!!!'}}</div>
         </div>
 
         <div class="btn-group">
             <button type="submit" class="btn btn-adding">Add Insurer</button>
-            <button type="button" class="btn cancel">Cancel</button>
+            <button type="button" class="btn cancel" (click)="Cancel()">Cancel</button>
         </div>
     </form>
 </div>

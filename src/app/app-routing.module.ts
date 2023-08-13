@@ -8,6 +8,8 @@ import { EditEmployeeComponent } from './edit-employee/edit-employee.component';
 import { AddPolicyComponent } from './add-policy/add-policy.component';
 import { EditPolicyComponent } from './edit-policy/edit-policy.component';
 import { ShowCompanyComponent } from './show-company/show-company.component';
+import { ShowPolicyComponent } from './show-policy/show-policy.component';
+import { ShowEmployeeComponent } from './show-employee/show-employee.component';
 
 var login = localStorage.getItem("dataLogin")!=null?true:false;
 var dataLogin = JSON.parse(localStorage.getItem("dataLogin") || "{}");
@@ -21,6 +23,8 @@ const routes: Routes = [
   { path: 'addpolicy', component: AddPolicyComponent },
   { path: 'editpolicy', component: EditPolicyComponent },
   { path: 'showcompany', component: ShowCompanyComponent },
+  { path: 'showpolicies', component: ShowPolicyComponent },
+  { path: 'showemployee', component: ShowEmployeeComponent },
   { path: '**', redirectTo: '/login', pathMatch: 'full' },
 
 ];

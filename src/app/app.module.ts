@@ -15,6 +15,8 @@ import { ShowCompanyComponent } from './show-company/show-company.component';
 import { FormsModule }   from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
+import { ShowPolicyComponent } from './show-policy/show-policy.component';
+import { ShowEmployeeComponent } from './show-employee/show-employee.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { HeaderComponent } from './header/header.component';
     EditCompanyComponent,
     ShowCompanyComponent,
     HeaderComponent,
+    ShowPolicyComponent,
+    ShowEmployeeComponent,
   ],
   imports: [
     BrowserModule,

@@ -32,12 +32,27 @@ export class AddCompanyComponent implements OnInit {
     if (this.Form.status == "VALID") {
       if (window.confirm("Confirm to Create new Company")) {
         this.apiService.postCreateCompany(companyName, companyPhone, address, this.JSimg, url, status).then((data: any) => {
+          if (data != null) {
+            alert("Created")
+            this.router.navigate(['/showcompany'])
+
+          }
+
         })
       }
+    }else{
+      alert("Please input correct information")
     }
     return false
   }
 
+  Cancel(){
+    if(window.confirm("Cancel?")){
+      this.router.navigate(['/showcompany'])
+    }
+  }
+
+//
   handleImageInput(event: any) {
     const selectedFile = event.target.files[0];
     if (selectedFile) {
@@ -67,8 +82,9 @@ export class AddCompanyComponent implements OnInit {
     });
   }
 
-  processBase64Data(data: string) {
-    this.JSimg = data.slice(22)
+  processBase64Data(data: any) {
+    data = data.split(",")
+    this.JSimg = data[1]    
   }
 
 }

@@ -44,12 +44,20 @@ export class ApiService {
         return this.http.get<any>(api).toPromise();
     }
 
-    getAllCompanies(limit?:number,page?:number,sortOrder?:string) {
-        limit==undefined?limit=10:true
-        page==undefined?page=1:true
-        sortOrder==undefined?sortOrder="asc":true
+    async getAllCompanies(limit?: number, page?: number, sortOrder?: string) {
+        limit == undefined ? limit = 10 : true
+        page == undefined ? page = 1 : true
+        sortOrder == undefined ? sortOrder = "asc" : true
         var api = `${this.apiUrl}/Company?limit=${limit}&page=${page}&sortOrder=${sortOrder}`;
-        return this.http.get<any>(api).toPromise();
+        return new Promise((resolve, reject) => {
+            this.http.get<any>(api).subscribe((data: any) => {
+                resolve(data);
+            },
+                (error) => {
+                    reject(error);
+                }
+            )
+        })
     }
 
     getCompanyByID(id: any) {
@@ -60,7 +68,7 @@ export class ApiService {
     putUpdateCompany(id: any, companyName: any, companyPhone: any, address: any, logo: any, url: any, status: any) {
         var api = `${this.apiUrl}/Company/update/${id}`;
         var body = {
-            companyId:id,
+            companyId: id,
             companyName: companyName,
             companyPhone: companyPhone,
             address: address,
@@ -69,9 +77,71 @@ export class ApiService {
             status: status
         }
         var JSbody = JSON.stringify(body)
-        console.log(JSbody);
-        console.log(logo);
-        
-        return this.http.put<any>(api,JSbody, this.httpOptions).toPromise();
+        return new Promise((resolve) => {
+            this.http.put<any>(api, JSbody, this.httpOptions).subscribe((data: any) => {
+                resolve(data);
+            },
+                (error) => {
+                    resolve(error)
+                }
+            )
+        }).catch()
+    }
+    postCreatePolicy(policyName: any, description: any, totalAmount: any, duration: any, companyId: any, banner: any, status: any) {
+        var api = `${this.apiUrl}/Policy/create`
+        var body = {
+            policyName: policyName,
+            desciption: description,
+            totalAmount: totalAmount,
+            duration: duration,
+            companyId: companyId,
+            banner: banner,
+            status: status
+        }
+
+        var JSbody = JSON.stringify(body)
+        return new Promise((resolve, reject) => {
+            this.http.post(api, JSbody, this.httpOptions)
+                .subscribe((data: any) => {
+                    resolve(data);
+                },
+                    (error) => {
+                        reject(error);
+                    })
+        })
+    }
+    getAllPolicies(limit?: number, page?: number, sortOrder?: string) {
+        limit == undefined ? limit = 10 : true
+        page == undefined ? page = 1 : true
+        sortOrder == undefined ? sortOrder = "asc" : true
+        var api = `${this.apiUrl}/Policy?limit=${limit}&page=${page}&sortOrder=${sortOrder}`;
+        return this.http.get<any>(api).toPromise();
+    }
+    getPolicyByID(id: any) {
+        var api = `${this.apiUrl}/Policy/${id}`
+        return this.http.get<any>(api).toPromise();
+    }
+    putUpdatePolicy(id:any,policyName: any, description: any, totalAmount: any, duration: any, companyId: any, banner: any, status: any){
+        var api = `${this.apiUrl}/Policy/update/${id}`
+        var body = {
+            policyId: id,
+            policyName: policyName,
+            desciption: description,
+            totalAmount: totalAmount,
+            duration: duration,
+            companyId: companyId,
+            banner: banner,
+            status: status
+        }
+        var JSbody = JSON.stringify(body)
+        return new Promise((resolve) => {
+            this.http.put<any>(api, JSbody, this.httpOptions).subscribe((data: any) => {
+                resolve(data);
+            },
+                (error) => {
+                    resolve(error)
+                }
+            )
+        }).catch()
     }
 }

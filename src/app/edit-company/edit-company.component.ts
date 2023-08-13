@@ -40,6 +40,8 @@ export class EditCompanyComponent implements OnInit {
   }
   
   UpdateCompany(name:any,hotline:any,address:any,website:any,status:any){
+    name == ""? name = null : true
+    this.Form.controls.name = new FormControl(name==""?null:name,[Validators.required])
     this.apiService.putUpdateCompany(
       this.data.companyId,
       name,
@@ -48,9 +50,20 @@ export class EditCompanyComponent implements OnInit {
       this.JSimg,
       website,
       status
-    )
+    ).then((data: any) => {
+      if(data.error==null){
+        alert(data.message)
+        this.router.navigate(['/showcompany'])
+      }else{
+        alert(data.error.CompanyName)
+      }
+    })
   }
-
+  Cancel(){
+    if(window.confirm("Cancel?")){
+      this.router.navigate(['/showcompany'])
+    }
+  }
   handleImageInput(event: any) {
     const selectedFile = event.target.files[0];
     if (selectedFile) {
@@ -66,7 +79,6 @@ export class EditCompanyComponent implements OnInit {
   readFileAsBase64(file: File): Promise<string> {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
-
       reader.onload = (event: any) => {
         const base64String = event.target.result;
         resolve(base64String);
@@ -82,8 +94,6 @@ export class EditCompanyComponent implements OnInit {
 
   processBase64Data(data: any) {
     data = data.split(",")
-    console.log(data);
-    
     this.JSimg = data[1]
   }
 }

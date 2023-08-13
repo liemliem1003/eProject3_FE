@@ -1,0 +1,34 @@
+<div class="container">
+    <button routerLink="/addpolicy">Add</button>
+    <div class="table-responsive-sm">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Banner</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Insurer</th>
+                    <th scope="col">Duration (days)</th>
+                    <th scope="col">Total Amount</th>
+                    <th scope="col">Status</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let policy of policies; let i = index">
+                    <td>{{i+1}}</td>
+                    <td><img src="http://localhost:3000/{{policy.banner}}" alt=""></td>
+                    <td>{{policy.policyName}}</td>
+                    <td>{{policy.companyId}}</td>
+                    <td>{{policy.duration}}</td>
+                    <td>{{policy.totalAmount | number: '1.0-0'}}</td>
+                    <td>{{policy.status}}</td>
+                    <td>{{policy.policyPhone}}</td>
+                    <td>
+                        <button routerLink="/editpolicy" [queryParams]="{ policyID: policy.policyId }" routerLinkActive="active" class="nav-link">Edit</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
