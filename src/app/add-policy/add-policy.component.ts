@@ -56,7 +56,7 @@ export class AddPolicyComponent implements OnInit {
         ).then((data: any) => {
           if (data.error==null) {
             alert("Created")
-            this.router.navigate(['/showpolicy'])
+            this.router.navigate(['/showpolicies'])
           }else{
             alert(data.error[""])
           }
@@ -67,7 +67,7 @@ export class AddPolicyComponent implements OnInit {
   }
   Cancel(){
     if(window.confirm("Cancel?")){
-      this.router.navigate(['/showpolycies'])
+      this.router.navigate(['/showpolicies'])
     }
   }
   //cover file to base64

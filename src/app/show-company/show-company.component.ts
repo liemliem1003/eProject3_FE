@@ -13,6 +13,7 @@ export class ShowCompanyComponent implements OnInit {
 
   ngOnInit(): void {
     this.apiService.getAllCompanies().then((data: any) => {
+      
       this.companies=data.companies
     })
   }

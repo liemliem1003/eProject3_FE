@@ -13,9 +13,8 @@ export class ShowEmployeeComponent implements OnInit {
 
   ngOnInit(): void {
     this.apiService.getEmployees().then((data: any) => {
-      this.employees = data.companies
-      console.log(this.employees);
-      
+      console.log(data);
+      this.employees = data.employees
     })
   }
 
