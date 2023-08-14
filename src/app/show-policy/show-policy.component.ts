@@ -25,10 +25,6 @@ export class ShowPolicyComponent implements OnInit {
       for (let i = 0; i < this.policies.length; i++) {
         this.policies[i].company = this.companies[this.policies[i].companyId]
       }
-      console.log(this.policies);
-
-
-      
     })
   }
 

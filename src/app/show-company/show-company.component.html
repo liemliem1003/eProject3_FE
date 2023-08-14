@@ -9,10 +9,10 @@
                     <th scope="col">Logo</th>
                     <th scope="col">Company Name</th>
                     <th scope="col">Address</th>
-                    <th scope="col">Status</th>
                     <th scope="col">Website</th>
                     <th scope="col">Phone</th>
-                    <th scope="col"></th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -21,9 +21,9 @@
                     <td><img src="http://localhost:3000/{{company.logo}}" alt=""></td>
                     <td>{{company.companyName}}</td>
                     <td>{{company.address}}</td>
-                    <td>{{company.status}}</td>
                     <td>{{company.url}}</td>
                     <td>{{company.companyPhone}}</td>
+                    <td><span class="{{company.status?'status-active':'status-inactive'}}">{{company.status?'Active':'Inactive'}}</span></td>
                     <td>
                         <button routerLink="/editcompany" [queryParams]="{ companyID: company.companyId }" routerLinkActive="active" class="nav-link">Edit</button>
                     </td>

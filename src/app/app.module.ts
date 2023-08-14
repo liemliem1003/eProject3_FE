@@ -17,6 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { ShowPolicyComponent } from './show-policy/show-policy.component';
 import { ShowEmployeeComponent } from './show-employee/show-employee.component';
+import { AddPolicyonuserComponent } from './add-policyonuser/add-policyonuser.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ShowEmployeeComponent } from './show-employee/show-employee.component';
     HeaderComponent,
     ShowPolicyComponent,
     ShowEmployeeComponent,
+    AddPolicyonuserComponent,
   ],
   imports: [
     BrowserModule,

@@ -27,8 +27,6 @@ export class AddEmployeeComponent implements OnInit {
 
   }
   CreateUser(username: any, password: any, name: any, dob: any, email: any, phone: any, address: any, status: any) {
-    console.log(this.Form);
-
     if (this.Form.status == "VALID") {
       this.apiService.postCreateEmployee(
         username,
@@ -42,7 +40,6 @@ export class AddEmployeeComponent implements OnInit {
         2,
         status
       ).then((data: any) => {
-        console.log(data);
         if (data.error==null) {
           alert("Created")
           this.router.navigate(['/showemployee'])
