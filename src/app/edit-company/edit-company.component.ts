@@ -42,22 +42,28 @@ export class EditCompanyComponent implements OnInit {
   UpdateCompany(name:any,hotline:any,address:any,website:any,status:any){
     name == ""? name = null : true
     this.Form.controls.name = new FormControl(name==""?null:name,[Validators.required])
-    this.apiService.putUpdateCompany(
-      this.data.companyId,
-      name,
-      hotline,
-      address,
-      this.JSimg,
-      website,
-      status
-    ).then((data: any) => {
-      if(data.error==null){
-        alert(data.message)
-        this.router.navigate(['/showcompany'])
-      }else{
-        alert(data.error.CompanyName)
+    if (this.Form.status == "VALID") {
+      if(window.confirm("Update?")){
+        this.apiService.putUpdateCompany(
+          this.data.companyId,
+          name,
+          hotline,
+          address,
+          this.JSimg,
+          website,
+          status
+        ).then((data: any) => {
+          if(data.error==null){
+            alert(data.message)
+            this.router.navigate(['/showcompany'])
+          }else{
+            alert(data.error.CompanyName)
+          }
+        })
       }
-    })
+      
+    }
+    
   }
   Cancel(){
     if(window.confirm("Cancel?")){

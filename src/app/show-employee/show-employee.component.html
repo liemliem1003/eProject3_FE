@@ -1,1 +1,38 @@
-<p>show-employee works!</p>
+<div class="container">
+    <button routerLink="/addemployee">Add</button>
+    <div class="table-responsive-sm">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">User ID</th>
+                    <th scope="col">Avatar</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">DOB</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Status</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let employee of employees; let i = index">
+                    <td>{{employee.userId}}</td>
+                    <td><img src="http://localhost:3000/{{employee?.avatar}}" alt=""></td>
+                    <td>{{employee.name}}</td>
+                    <td>{{employee.phone}}</td>
+                    <td>{{employee.dob | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{employee.email}}</td>
+                    <td>{{employee.address}}</td>
+                    <td>{{employee.status}}</td>
+                    <td>{{employee.url}}</td>
+                    <td>{{employee.companyPhone}}</td>
+                    <td>
+                        <button routerLink="/editemployee" [queryParams]="{ employeeID: employee.userId }"
+                            routerLinkActive="active" class="nav-link">Edit</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

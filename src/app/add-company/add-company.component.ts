@@ -32,12 +32,12 @@ export class AddCompanyComponent implements OnInit {
     if (this.Form.status == "VALID") {
       if (window.confirm("Confirm to Create new Company")) {
         this.apiService.postCreateCompany(companyName, companyPhone, address, this.JSimg, url, status).then((data: any) => {
-          if (data != null) {
+          if (data.error==null) {
             alert("Created")
             this.router.navigate(['/showcompany'])
-
+          }else{
+            alert(data.error[""])
           }
-
         })
       }
     }else{

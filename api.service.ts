@@ -34,9 +34,9 @@ export class ApiService {
                     resolve(data);
                 },
                     (error) => {
-                        reject(error);
+                        resolve(error);
                     })
-        })
+        }).catch()
     }
 
     getLogin(username: any, password: any) {
@@ -54,10 +54,10 @@ export class ApiService {
                 resolve(data);
             },
                 (error) => {
-                    reject(error);
+                    resolve(error);
                 }
             )
-        })
+        }).catch()
     }
 
     getCompanyByID(id: any) {
@@ -106,9 +106,9 @@ export class ApiService {
                     resolve(data);
                 },
                     (error) => {
-                        reject(error);
+                        resolve(error)
                     })
-        })
+        }).catch()
     }
     getAllPolicies(limit?: number, page?: number, sortOrder?: string) {
         limit == undefined ? limit = 10 : true
@@ -144,4 +144,48 @@ export class ApiService {
             )
         }).catch()
     }
+
+    getEmployees(limit?: number, page?: number, sortOrder?: string) {
+        limit == undefined ? limit = 10 : true
+        page == undefined ? page = 1 : true
+        sortOrder == undefined ? sortOrder = "asc" : true
+        var api = `${this.apiUrl}/Users?limit=${limit}&page=${page}&sortOrder=${sortOrder}`;
+        return new Promise((resolve, reject) => {
+            this.http.get<any>(api).subscribe((data: any) => {
+                resolve(data);
+            },
+                (error) => {
+                    resolve(error);
+                }
+            )
+        }).catch()
+    }
+    postCreateEmployee(username:any,password:any,name:any,dob:any,email:any,phone:any,address:any,avatar:any,role:any,status:any){
+        var api = `${this.apiUrl}/Users/create`
+        var body = {
+            username: username,
+            password: password,
+            name: name,
+            dob: dob,
+            email: email,
+            phone: phone,
+            address: address,
+            avatar:avatar,
+            role:role,
+            status:status
+        }
+        console.log(body);
+        
+        var JSbody = JSON.stringify(body)
+        return new Promise((resolve, reject) => {
+            this.http.post(api, JSbody, this.httpOptions)
+                .subscribe((data: any) => {
+                    resolve(data);
+                },
+                    (error) => {
+                        resolve(error)
+                    })
+        }).catch()
+    }
+
 }

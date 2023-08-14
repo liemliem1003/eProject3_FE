@@ -54,27 +54,32 @@ export class EditPolicyComponent implements OnInit {
       })
     })
   }
-  //id:any,policyName: any, description: any, totalAmount: any, duration: any, companyId: any, banner: any, status: any
+
   Update(policyName:any,description:any,totalAmount:any,duration:any,companyId:any,status:any){
     this.Form.controls.name = new FormControl(policyName==""?null:policyName,[Validators.required])
     this.Form.controls.description = new FormControl(description==""?null:description,[Validators.required])
-    this.apiService.putUpdatePolicy(
-      this.data.policyId,
-      policyName,
-      description,
-      this.data.totalAmount,
-      this.data.duration,
-      this.data.companyId,
-      this.JSimg,
-      status
-    ).then((data: any) => {
-      if(data.error==null){
-        alert(data.message)
-        this.router.navigate(['/showpolicies'])
-      }else{
-        alert(data.error.CompanyName)
+    if (this.Form.status == "VALID") {
+      if(window.confirm("Update?")){
+        this.apiService.putUpdatePolicy(
+          this.data.policyId,
+          policyName,
+          description,
+          this.data.totalAmount,
+          this.data.duration,
+          this.data.companyId,
+          this.JSimg,
+          status
+        ).then((data: any) => {
+          if(data.error==null){
+            alert(data.message)
+            this.router.navigate(['/showpolicies'])
+          }else{
+            alert(data.error.CompanyName)
+          }
+        })
       }
-    })
+    }
+    
   }
   Cancel(){
     if(window.confirm("Cancel?")){

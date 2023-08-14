@@ -53,7 +53,14 @@ export class AddPolicyComponent implements OnInit {
           companyId,
           this.JSimg,
           status
-        ).then((data: any) => {})
+        ).then((data: any) => {
+          if (data.error==null) {
+            alert("Created")
+            this.router.navigate(['/showpolicy'])
+          }else{
+            alert(data.error[""])
+          }
+        })
       }
     }
     return false
