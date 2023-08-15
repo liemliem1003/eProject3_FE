@@ -189,10 +189,10 @@ export class ApiService {
         var api = `${this.apiUrl}/Users/${id}`;
         return this.http.get<any>(api).toPromise();
     }
-    putUpdateEmployee(id:any,username:any,password:any,name:any,dob:any,email:any,phone:any,address:any,avatar:any,status:any){
+    putUpdateEmployee(id:any,password:any,name:any,dob:any,email:any,phone:any,address:any,avatar:any,status:any){
         var api = `${this.apiUrl}/Users/update/${id}`
         var body = {
-            username: username,
+            userId:id,
             password: password,
             name: name,
             dob: dob,

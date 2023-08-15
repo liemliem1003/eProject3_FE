@@ -41,12 +41,11 @@ export class EditEmployeeComponent implements OnInit {
       })})
 
   }
-  UpdateEmployee(){
+  UpdateEmployee(status:any){
     if(this.Form.status=="VALID"){
       if(window.confirm("Update?")){
         this.apiService.putUpdateEmployee(
           this.data.userId,
-          this.Form.get('username')?.value,
           this.Form.get('password')?.value,
           this.Form.get('name')?.value,
           this.ConvertDate(this.Form.get('dob')?.value),
@@ -54,11 +53,11 @@ export class EditEmployeeComponent implements OnInit {
           this.Form.get('phone')?.value,
           this.Form.get('address')?.value,
           this.Form.get('avatar')?.value,
-          this.data.role,
+          status
         ).then((data: any) => {
           if(data.error==null){
             alert(data.message)
-            this.router.navigate(['/showpolicies'])
+            this.router.navigate(['/showemployee'])
           }else{
             alert(data.error.CompanyName)
           }

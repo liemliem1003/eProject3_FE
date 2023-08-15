@@ -1,6 +1,6 @@
 <div class="container">
     <h2>Edit Employee</h2>
-        <form [formGroup]="Form" (ngSubmit)="UpdateEmployee()">
+        <form [formGroup]="Form" (ngSubmit)="UpdateEmployee(active.checked)">
         <div class="form-group">
             <label for="name">Name</label>
             <input type="text" class="form-control {{Form.controls.name.status !== 'VALID' ? 'is-invalid' :'is-valid'}}" #name name="name" formControlName="name" placeholder="Input Employee Name">
