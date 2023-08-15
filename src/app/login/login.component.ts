@@ -23,6 +23,8 @@ export class LoginComponent implements OnInit {
     } else {
       this.apiService.getLogin(username, password).then((data: any) => {
         if (data!=null) {
+          console.log(data);
+          
           this.data = data;
           data = JSON.stringify(data);
           localStorage.setItem("dataLogin", data);

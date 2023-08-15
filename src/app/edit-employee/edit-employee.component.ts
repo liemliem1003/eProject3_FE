@@ -41,7 +41,7 @@ export class EditEmployeeComponent implements OnInit {
       })})
 
   }
-  UpdateEmployee(status:any){
+  UpdateEmployee(){
     if(this.Form.status=="VALID"){
       if(window.confirm("Update?")){
         this.apiService.putUpdateEmployee(
@@ -55,7 +55,6 @@ export class EditEmployeeComponent implements OnInit {
           this.Form.get('address')?.value,
           this.Form.get('avatar')?.value,
           this.data.role,
-          status
         ).then((data: any) => {
           if(data.error==null){
             alert(data.message)

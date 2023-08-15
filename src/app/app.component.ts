@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'eProject3';
+  userdetail = JSON.parse(localStorage.getItem("dataLogin") || "{}");
+
 }
