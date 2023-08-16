@@ -6,88 +6,109 @@ $fontFamily: Arial, sans-serif;
 
 html,
 body {
-    height: 100%;
-    padding: 0;
+  height: 100%;
+  padding: 0;
 }
+
 button {
-    flex:1;
-    background-color: $buttonBackground;
-    color: $buttonText;
-    border: none;
-    padding: 10px 20px;
-    font-weight: bold;
-    border-radius: 4px;
-    cursor: pointer;
+  flex: 1;
+  background-color: $buttonBackground;
+  color: $buttonText;
+  border: none;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
 }
-button:hover{
-    background-color: #0047B3;
-    color: white;
+
+button:hover {
+  background-color: #0047B3;
+  color: white;
 }
-.lable-input{
-    font-weight: bold;
-    display: block;
-    margin-bottom: 5px;
-    color: #0047B3;
+
+.lable-input {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+  color: #0047B3;
 }
-.lable-header-adding{
-    text-align: center;
-    color: $header;
+
+.lable-header-adding {
+  text-align: center;
+  color: $header;
 }
-.btn-group{
-    display: flex;
+
+.btn-group {
+  display: flex;
 }
-.cancel:hover{
-    font-weight: bold;
+
+.cancel:hover {
+  font-weight: bold;
 }
-.cancel{
-    flex: 1;
-    display: block;
-    margin-left: 10px;
-    font-size: 12px;
-    font-weight: 100;
-    color: black;
-    background-color: #c2c2c2;
+
+.cancel {
+  flex: 1;
+  display: block;
+  margin-left: 10px;
+  font-size: 12px;
+  font-weight: 100;
+  color: black;
+  background-color: #c2c2c2;
 }
+
 .table {
-    font-size: 14px; /* Kích thước chữ cho bảng */
-  }
+  font-size: 14px;
+  /* Kích thước chữ cho bảng */
+}
 
-  .table th,
-  .table td {
-    vertical-align: middle; /* Canh giữa nội dung của th và td */
-  }
+.table th,
+.table td {
+  vertical-align: middle;
+  /* Canh giữa nội dung của th và td */
+}
 
-  .table img {
-    max-width: 50px; /* Giới hạn kích thước ảnh logo */
-    height: auto;
-  }
+.table img {
+  max-width: 50px;
+  /* Giới hạn kích thước ảnh logo */
+  height: auto;
+}
 
-  .table thead th {
-    background-color: #f8f9fa; /* Màu nền cho header */
-  }
+.table thead th {
+  background-color: #f8f9fa;
+  /* Màu nền cho header */
+}
 
-  .table-striped tbody tr:nth-of-type(odd) {
-    background-color: #f8f9fa; /* Màu nền xen kẽ cho dòng chẵn */
-  }
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f8f9fa;
+  /* Màu nền xen kẽ cho dòng chẵn */
+}
 
-  .table-striped tbody tr:hover {
-    background-color: #e9ecef; /* Màu nền khi hover chuột */
-  }
-  button a{
-    width: 100%!important;
-    height: 100%!important;
-  }
-  .status-active{
-    color:white;
-    background: green;
-    font-size: 11px;
-    padding: 2px 5px;
-    border-radius: 5px;
-  }
-  .status-inactive{
-    color:white;
-    background: red;
-    font-size: 11px;
-    padding: 2px 5px;
-    border-radius: 5px;
-  }
+.table-striped tbody tr:hover {
+  background-color: #e9ecef;
+  /* Màu nền khi hover chuột */
+}
+
+button a {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.status-active {
+  color: white;
+  background: green;
+  font-size: 11px;
+  padding: 2px 5px;
+  border-radius: 5px;
+}
+
+.status-inactive {
+  color: white;
+  background: red;
+  font-size: 11px;
+  padding: 2px 5px;
+  border-radius: 5px;
+}
+
+tr {
+  text-align: center;
+}

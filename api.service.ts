@@ -117,7 +117,7 @@ export class ApiService {
         var api = `${this.apiUrl}/Policy?limit=${limit}&page=${page}&sortOrder=${sortOrder}`;
         return this.http.get<any>(api).toPromise();
     }
-    getPolicyByID(id: any) {
+    async getPolicyByID(id: any) {
         var api = `${this.apiUrl}/Policy/${id}`
         return this.http.get<any>(api).toPromise();
     }
@@ -185,7 +185,7 @@ export class ApiService {
                     })
         }).catch()
     }
-    getEmployeeByID(id: any) {
+    async getEmployeeByID(id: any) {
         var api = `${this.apiUrl}/Users/${id}`;
         return this.http.get<any>(api).toPromise();
     }
@@ -212,6 +212,54 @@ export class ApiService {
             },
                 (error) => {
                     reject(error)
+                }
+            )
+        }).catch()
+    }
+    getAllActivePolicy(sort?:any){
+        sort==undefined?sort='asc':false
+        var api = `${this.apiUrl}/Policy/getactive?sortOrder=${sort}`
+        return new Promise((resolve, reject) => {
+            this.http.get<any>(api).subscribe((data: any) => {
+                resolve(data);
+            },
+                (error) => {
+                    reject(error);
+                }
+            )
+        }).catch()
+    }
+    postCreatePolicyOnUser(policyId:any,userId:any,startDate:any,endDate:any,avaibleAmount:any){
+        var api = `${this.apiUrl}/PolicyOnUser/create`;
+        var body = {
+            policyId: policyId,
+            userId: userId,
+            startDate: startDate,
+            endDate: endDate,
+            avaibleAmount: avaibleAmount,
+        }
+        var JSbody = JSON.stringify(body)
+        return new Promise((resolve, reject) => {
+            this.http.post(api, JSbody, this.httpOptions)
+                .subscribe((data: any) => {
+                    resolve(data);
+                },
+                    (error) => {
+                        resolve(error)
+                    })
+        }).catch()
+    }
+    getPolicyOnUser(limit?: number, page?: number, sortOrder?: string) {
+        limit == undefined ? limit = 10 : true
+        page == undefined ? page = 1 : true
+        sortOrder == undefined ? sortOrder = "asc" : true
+        var api = `${this.apiUrl}/PolicyOnUser?limit=${limit}&page=${page}&sortOrder=${sortOrder}`;
+        return new Promise((resolve, reject) => {
+            this.http.get<any>(api).subscribe((data: any) => {
+                resolve(data);
+            },
+                (error) => {
+                    resolve(error);
                 }
             )
         }).catch()

@@ -11,6 +11,7 @@ import { ShowCompanyComponent } from './show-company/show-company.component';
 import { ShowPolicyComponent } from './show-policy/show-policy.component';
 import { ShowEmployeeComponent } from './show-employee/show-employee.component';
 import { AddPolicyonuserComponent } from './add-policyonuser/add-policyonuser.component';
+import { ShowPolicyonuserComponent } from './show-policyonuser/show-policyonuser.component';
 
 var logindetail = JSON.parse(localStorage.getItem("dataLogin") || "{}")
 
@@ -26,6 +27,7 @@ const adminRoute: Routes = [
   { path: 'showpolicies', component: ShowPolicyComponent },
   { path: 'showemployee', component: ShowEmployeeComponent },
   { path: 'addpolicyonuser', component: AddPolicyonuserComponent },
+  { path: 'showpolicyonuser', component: ShowPolicyonuserComponent },
   { path: '**', redirectTo: '/login', pathMatch: 'full' },
 ];
 

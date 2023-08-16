@@ -12,7 +12,7 @@
                     <th scope="col">Email</th>
                     <th scope="col">Address</th>
                     <th scope="col">Status</th>
-                    <th scope="col">Action</th>
+                    <th scope="col" colspan="2">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -24,10 +24,17 @@
                     <td>{{employee.dob | date: 'dd/MM/yyyy'}}</td>
                     <td>{{employee.email}}</td>
                     <td>{{employee.address}}</td>
-                    <td><span class="{{employee.status?'status-active':'status-inactive'}}">{{employee.status?'Active':'Inactive'}}</span></td>
+                    <td><span
+                            class="{{employee.status?'status-active':'status-inactive'}}">{{employee.status?'Active':'Inactive'}}</span>
+                    </td>
                     <td>
                         <button routerLink="/editemployee" [queryParams]="{ employeeID: employee.userId }"
                             routerLinkActive="active" class="nav-link">Edit</button>
+                        
+                    </td>
+                    <td align="center">
+                        <button routerLink="/addpolicyonuser" [queryParams]="{ employeeID: employee.userId }"
+                            routerLinkActive="active" class="nav-link">Add Policy</button>
                     </td>
                 </tr>
             </tbody>

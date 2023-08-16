@@ -18,6 +18,8 @@ import { HeaderComponent } from './header/header.component';
 import { ShowPolicyComponent } from './show-policy/show-policy.component';
 import { ShowEmployeeComponent } from './show-employee/show-employee.component';
 import { AddPolicyonuserComponent } from './add-policyonuser/add-policyonuser.component';
+import { ShowPolicyonuserComponent } from './show-policyonuser/show-policyonuser.component';
+import { AddClaimComponent } from './add-claim/add-claim.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { AddPolicyonuserComponent } from './add-policyonuser/add-policyonuser.co
     ShowPolicyComponent,
     ShowEmployeeComponent,
     AddPolicyonuserComponent,
+    ShowPolicyonuserComponent,
+    AddClaimComponent,
   ],
   imports: [
     BrowserModule,

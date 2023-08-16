@@ -23,7 +23,7 @@
                     <td>{{policy.duration / 30}} Months</td>
                     <td>{{policy.totalAmount | number: '1.0-0'}}</td>
                     <td><span class="{{policy.status?'status-active':'status-inactive'}}">{{policy.status?'Active':'Inactive'}}</span></td>
-                    <td>
+                    <td align="center">
                         <button routerLink="/editpolicy" [queryParams]="{ policyID: policy.policyId }" routerLinkActive="active" class="nav-link">Edit</button>
                     </td>
                 </tr>

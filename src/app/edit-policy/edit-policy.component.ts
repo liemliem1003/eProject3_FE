@@ -45,18 +45,17 @@ export class EditPolicyComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.apiService.getPolicyByID(params['policyID']).then((data: any) => {
         this.data = data
+        this.Form.get('name')?.setValue(this.data?.policyName);
+        this.Form.get('description')?.setValue(this.data?.desciption);
         this.data.company = this.companies[data.companyId]
-        this.Form.controls.name = new FormControl(this.data?.policyName)
-        this.Form.controls.description = new FormControl(this.data?.desciption)
+        this.Form.controls.description = new FormControl()
         this.Form.controls.banner = new FormControl(this.data?.banner)
         this.JSimg = this.data?.banner
-
       })
     })
   }
 
   Update(policyName:any,description:any,totalAmount:any,duration:any,companyId:any,status:any){
-    
     this.Form.controls.name = new FormControl(policyName==""?null:policyName,[Validators.required])
     this.Form.controls.description = new FormControl(description==""?null:description,[Validators.required])
     if (this.Form.status == "VALID") {

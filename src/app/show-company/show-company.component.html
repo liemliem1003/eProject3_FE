@@ -24,7 +24,7 @@
                     <td>{{company.url}}</td>
                     <td>{{company.companyPhone}}</td>
                     <td><span class="{{company.status?'status-active':'status-inactive'}}">{{company.status?'Active':'Inactive'}}</span></td>
-                    <td>
+                    <td align="center">
                         <button routerLink="/editcompany" [queryParams]="{ companyID: company.companyId }" routerLinkActive="active" class="nav-link">Edit</button>
                     </td>
                 </tr>
