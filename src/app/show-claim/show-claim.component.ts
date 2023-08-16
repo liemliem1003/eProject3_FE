@@ -3,33 +3,32 @@ import { ApiService } from '../../../api.service'
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-show-policyonuser',
-  templateUrl: './show-policyonuser.component.html',
-  styleUrls: ['./show-policyonuser.component.scss']
+  selector: 'app-show-claim',
+  templateUrl: './show-claim.component.html',
+  styleUrls: ['./show-claim.component.scss']
 })
-export class ShowPolicyonuserComponent implements OnInit {
+export class ShowClaimComponent implements OnInit {
   data:any
   constructor(private apiService: ApiService, private router: Router) { }
-
+  
   ngOnInit(): void {
-    this.apiService.getPolicyOnUser().then((data: any) => {
-      for (let i = 0; i < data.length; i++) {
-        data[i].endDate = this.ConvertDateToInput(data[i].endDate)
-        data[i].startDate = this.ConvertDateToInput(data[i].startDate)
-        this.apiService.getEmployeeByID(data[i].userId).then((userData:any)=>{
-          data[i].userInfor = userData
+    this.apiService.getClaims().then((data: any) => {
+      for (let i = 0; i < data.claims.length; i++) {
+        this.apiService.getEmployeeByID(data.claims[i].userId).then((userData:any)=>{
+          data.claims[i].userInfor = userData
         })
-        this.apiService.getPolicyByID(data[i].policyId).then((policyData:any)=>{
+        this.apiService.getPolicyByID(data.claims[i].policyId).then((policyData:any)=>{
           this.apiService.getCompanyByID(policyData.companyId).then((companyData:any)=>{
             policyData.companyInfor = companyData
           })
-          data[i].policyInfor = policyData
+          data.claims[i].policyInfor = policyData
         })
       }
-      this.data = data
+      this.data = data.claims
+      console.log(data);
     })
   }
-  // Date control
+  //Date control
   ConvertDateToInput(inputDate: any) {
     inputDate = new Date(inputDate);
     const year = inputDate.getFullYear();
@@ -38,5 +37,4 @@ export class ShowPolicyonuserComponent implements OnInit {
     const formattedDate = `${day}-${month}-${year}`;
     return formattedDate
   }
-
 }

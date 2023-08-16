@@ -44,8 +44,6 @@ export class AddPolicyonuserComponent implements OnInit {
           this.Form.controls.endDate.value,
           this.availablePolicy[Number(this.Form.controls.selectedPolicy.value)].totalAmount
         ).then((data: any) => {
-          console.log(data);
-
         })
       }
     }
@@ -69,7 +67,7 @@ export class AddPolicyonuserComponent implements OnInit {
     const year = inputDate.getFullYear();
     const month = (inputDate.getMonth() + 1).toString().padStart(2, '0');
     const day = inputDate.getDate().toString().padStart(2, '0');
-    const formattedDate = `${year}-${month}-${day}`;
+    const formattedDate = `${day}-${month}-${year}`;
     return formattedDate
   }
   CalculateEndDate(startDate:any) {

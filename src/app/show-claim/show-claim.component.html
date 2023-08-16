@@ -5,26 +5,24 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Employ Name</th>
+                    <th scope="col">Claimant</th>
                     <th scope="col">Insurer</th>
                     <th scope="col">Policy Name</th>
-                    <th scope="col">Available Amount</th>
-                    <th scope="col">Start Date</th>
-                    <th scope="col">End Date</th>
+                    <th scope="col">Approve Amount</th>
+                    <th scope="col">Create Date</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let item of data; let i = index">
-                    <td>{{i}}</td>
+                    <td>{{i+1}}</td>
                     <td>{{item.userInfor?.name}}</td>
                     <td>{{item.policyInfor?.companyInfor?.companyName}}</td>
                     <td>{{item.policyInfor?.policyName}}</td>
-                    <td>{{item.avaibleAmount | number: '1.0-0'}}</td>
-                    <td>{{item.startDate}}</td>
-                    <td>{{item.endDate}}</td>
+                    <td>{{item.appAmount | number: '1.0-0'}}</td>
+                    <td>{{ConvertDateToInput(item.createDate)}}</td>
                     <td align="center">
-                        <button routerLink="/addclaim" [queryParams]="{ policyonuserId: item.id }" routerLinkActive="active" class="nav-link">Create Claim</button>
+                        <button routerLink="/showclaimdetail" [queryParams]="{ claimid: item.claimId }" routerLinkActive="active" class="nav-link">Show Claim details</button>
                     </td>
                 </tr>
             </tbody>

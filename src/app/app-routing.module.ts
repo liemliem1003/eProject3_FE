@@ -12,6 +12,9 @@ import { ShowPolicyComponent } from './show-policy/show-policy.component';
 import { ShowEmployeeComponent } from './show-employee/show-employee.component';
 import { AddPolicyonuserComponent } from './add-policyonuser/add-policyonuser.component';
 import { ShowPolicyonuserComponent } from './show-policyonuser/show-policyonuser.component';
+import { ShowClaimComponent } from './show-claim/show-claim.component';
+import { AddClaimComponent } from './add-claim/add-claim.component';
+import { ShowClaimdetailComponent } from './show-claimdetail/show-claimdetail.component';
 
 var logindetail = JSON.parse(localStorage.getItem("dataLogin") || "{}")
 
@@ -28,6 +31,9 @@ const adminRoute: Routes = [
   { path: 'showemployee', component: ShowEmployeeComponent },
   { path: 'addpolicyonuser', component: AddPolicyonuserComponent },
   { path: 'showpolicyonuser', component: ShowPolicyonuserComponent },
+  { path: 'addclaim', component: AddClaimComponent },
+  { path: 'showclaim', component: ShowClaimComponent },
+  { path: 'showclaimdetail', component: ShowClaimdetailComponent },
   { path: '**', redirectTo: '/login', pathMatch: 'full' },
 ];
 

@@ -202,10 +202,7 @@ export class ApiService {
             avatar:avatar,
             status:status
         }
-        console.log(api);
-        
         var JSbody = JSON.stringify(body)
-        console.log(JSbody);
         return new Promise((resolve, reject) => {
             this.http.put<any>(api, JSbody, this.httpOptions).subscribe((data: any) => {
                 resolve(data);
@@ -263,5 +260,43 @@ export class ApiService {
                 }
             )
         }).catch()
+    }
+    getClaims(limit?: number, page?: number, sortOrder?: string) {
+        limit == undefined ? limit = 10 : true
+        page == undefined ? page = 1 : true
+        sortOrder == undefined ? sortOrder = "asc" : true
+        var api = `${this.apiUrl}/Claim?limit=${limit}&page=${page}&sortOrder=${sortOrder}`;
+        return new Promise((resolve, reject) => {
+            this.http.get<any>(api).subscribe((data: any) => {
+                resolve(data);
+            },
+                (error) => {
+                    resolve(error);
+                }
+            )
+        }).catch()
+    }
+    getClaimByID(id:any,limit?: number, page?: number, sortOrder?: string){
+        limit == undefined ? limit = 10 : true
+        page == undefined ? page = 1 : true
+        sortOrder == undefined ? sortOrder = "asc" : true
+        var api = `${this.apiUrl}/Claim/${id}?limit=${limit}&page=${page}&sortOrder=${sortOrder}`;
+        return this.http.get<any>(api).toPromise();
+    }
+    postApproveClaim(id:any){
+        var api = `${this.apiUrl}/Claim/approve/${id}`;
+        return new Promise((resolve, reject) => {
+            this.http.get<any>(api).subscribe((data: any) => {
+                resolve(data);
+            },
+                (error) => {
+                    resolve(error);
+                }
+            )
+        }).catch()
+    }
+    getPolicyOnUserID(id: any) {
+        var api = `${this.apiUrl}/Company/${id}`;
+        return this.http.get<any>(api).toPromise();
     }
 }

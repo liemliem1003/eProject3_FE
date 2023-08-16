@@ -35,8 +35,6 @@ export class EditCompanyComponent implements OnInit {
         this.JSimg = this.data?.logo
       })
     })
-
-    
   }
   
   UpdateCompany(name:any,hotline:any,address:any,website:any,status:any){
@@ -61,9 +59,7 @@ export class EditCompanyComponent implements OnInit {
           }
         })
       }
-      
     }
-    
   }
   Cancel(){
     if(window.confirm("Cancel?")){

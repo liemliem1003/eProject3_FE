@@ -1,1 +1,15 @@
-<p>add-claim works!</p>
+<div class="container">
+    <h2>Insurer Name</h2>
+    <form [formGroup]="Form">
+        <!-- <form [formGroup]="Form" (ngSubmit)="UpdateCompany(name.value,hotline.value,address.value,website.value,status.checked)" > -->
+        <div class="form-group">
+            <label for="name">name</label>
+            <input type="text" class="form-control" #name name="name" formControlName="name">
+        </div>
+        
+        <div class="btn-group">
+            <button type="submit" class="btn btn-adding">Edit Insurer</button>
+            <button type="button" class="btn cancel" (click)="Cancel()">Cancel</button>
+        </div>
+    </form>
+</div>

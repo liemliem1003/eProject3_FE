@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AddCompanyComponent } from './add-company/add-company.component';
@@ -20,6 +19,9 @@ import { ShowEmployeeComponent } from './show-employee/show-employee.component';
 import { AddPolicyonuserComponent } from './add-policyonuser/add-policyonuser.component';
 import { ShowPolicyonuserComponent } from './show-policyonuser/show-policyonuser.component';
 import { AddClaimComponent } from './add-claim/add-claim.component';
+import { ShowClaimComponent } from './show-claim/show-claim.component';
+import { ShowClaimdetailComponent } from './show-claimdetail/show-claimdetail.component';
+import { FunctioninshowComponent } from './functioninshow/functioninshow.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,9 @@ import { AddClaimComponent } from './add-claim/add-claim.component';
     AddPolicyonuserComponent,
     ShowPolicyonuserComponent,
     AddClaimComponent,
+    ShowClaimComponent,
+    ShowClaimdetailComponent,
+    FunctioninshowComponent,
   ],
   imports: [
     BrowserModule,
