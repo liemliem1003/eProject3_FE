@@ -8,24 +8,30 @@ import { Router } from '@angular/router';
   styleUrls: ['./show-claim.component.scss']
 })
 export class ShowClaimComponent implements OnInit {
-  data:any
+  data: any
+  paging: any
+  limit: any = 1
+  currentPage: any = 2
+  sort: any = 'asc'
+  searchvalue: any = ""
+
   constructor(private apiService: ApiService, private router: Router) { }
-  
+
   ngOnInit(): void {
-    this.apiService.getClaims().then((data: any) => {
+    this.apiService.getClaims(this.limit, this.currentPage, this.sort).then((data: any) => {
+      this.paging = Math.ceil(data.totalCount / this.limit)
       for (let i = 0; i < data.claims.length; i++) {
-        this.apiService.getEmployeeByID(data.claims[i].userId).then((userData:any)=>{
+        this.apiService.getEmployeeByID(data.claims[i].userId).then((userData: any) => {
           data.claims[i].userInfor = userData
         })
-        this.apiService.getPolicyByID(data.claims[i].policyId).then((policyData:any)=>{
-          this.apiService.getCompanyByID(policyData.companyId).then((companyData:any)=>{
+        this.apiService.getPolicyByID(data.claims[i].policyId).then((policyData: any) => {
+          this.apiService.getCompanyByID(policyData.companyId).then((companyData: any) => {
             policyData.companyInfor = companyData
           })
           data.claims[i].policyInfor = policyData
         })
       }
       this.data = data.claims
-      console.log(data);
     })
   }
   //Date control
@@ -36,5 +42,122 @@ export class ShowClaimComponent implements OnInit {
     const day = inputDate.getDate().toString().padStart(2, '0');
     const formattedDate = `${day}-${month}-${year}`;
     return formattedDate
+  }
+  Search(value: any) {
+    this.searchvalue = value
+    this.currentPage = 1
+    if (value == "") {
+      this.apiService.getClaims(this.limit, this.currentPage, this.sort).then((data: any) => {
+        this.paging = Math.ceil(data.totalCount / this.limit)
+        for (let i = 0; i < data.claims.length; i++) {
+          this.apiService.getEmployeeByID(data.claims[i].userId).then((userData: any) => {
+            data.claims[i].userInfor = userData
+          })
+          this.apiService.getPolicyByID(data.claims[i].policyId).then((policyData: any) => {
+            this.apiService.getCompanyByID(policyData.companyId).then((companyData: any) => {
+              policyData.companyInfor = companyData
+            })
+            data.claims[i].policyInfor = policyData
+          })
+        }
+        this.data = data.claims
+      })
+    } else {
+      this.apiService.getSearchClaim(value, this.limit, this.currentPage, this.sort).then((data: any) => {
+        this.data = data.employees
+        console.log(data.Claims);
+        console.log(data.Claims['$id']);
+        
+        for (let i = 0; i < data.claims.length; i++) {
+          this.apiService.getEmployeeByID(data.claims[i].userId).then((userData: any) => {
+            data.claims[i].userInfor = userData
+          })
+          this.apiService.getPolicyByID(data.claims[i].policyId).then((policyData: any) => {
+            this.apiService.getCompanyByID(policyData.companyId).then((companyData: any) => {
+              policyData.companyInfor = companyData
+            })
+            data.claims[i].policyInfor = policyData
+          })
+        }
+        this.data = data.claims
+        this.paging = Math.ceil(data.totalCount / this.limit)
+      })
+    }
+    return false
+  }
+  Sort(option: any) {
+    this.sort = option
+    this.currentPage = 1
+    if (this.searchvalue == "") {
+      this.apiService.getClaims(this.limit, this.currentPage, this.sort).then((data: any) => {
+        this.paging = Math.ceil(data.totalCount / this.limit)
+        for (let i = 0; i < data.claims.length; i++) {
+          this.apiService.getEmployeeByID(data.claims[i].userId).then((userData: any) => {
+            data.claims[i].userInfor = userData
+          })
+          this.apiService.getPolicyByID(data.claims[i].policyId).then((policyData: any) => {
+            this.apiService.getCompanyByID(policyData.companyId).then((companyData: any) => {
+              policyData.companyInfor = companyData
+            })
+            data.claims[i].policyInfor = policyData
+          })
+        }
+        this.data = data.claims
+      })
+    } else {
+      this.apiService.getSearchClaim(this.searchvalue, this.limit, this.currentPage, this.sort).then((data: any) => {
+        this.data = data.employees
+        for (let i = 0; i < data.claims.length; i++) {
+          this.apiService.getEmployeeByID(data.claims[i].userId).then((userData: any) => {
+            data.claims[i].userInfor = userData
+          })
+          this.apiService.getPolicyByID(data.claims[i].policyId).then((policyData: any) => {
+            this.apiService.getCompanyByID(policyData.companyId).then((companyData: any) => {
+              policyData.companyInfor = companyData
+            })
+            data.claims[i].policyInfor = policyData
+          })
+        }
+        this.data = data.claims
+        this.paging = Math.ceil(data.totalCount / this.limit)
+      })
+    }
+  }
+  SwitchPage(page: any) {
+    this.currentPage = page
+    if (this.searchvalue == "") {
+      this.apiService.getClaims(this.limit, this.currentPage, this.sort).then((data: any) => {
+        this.paging = Math.ceil(data.totalCount / this.limit)
+        for (let i = 0; i < data.claims.length; i++) {
+          this.apiService.getEmployeeByID(data.claims[i].userId).then((userData: any) => {
+            data.claims[i].userInfor = userData
+          })
+          this.apiService.getPolicyByID(data.claims[i].policyId).then((policyData: any) => {
+            this.apiService.getCompanyByID(policyData.companyId).then((companyData: any) => {
+              policyData.companyInfor = companyData
+            })
+            data.claims[i].policyInfor = policyData
+          })
+        }
+        this.data = data.claims
+      })
+    } else {
+      this.apiService.getSearchClaim(this.searchvalue, this.limit, this.currentPage, this.sort).then((data: any) => {
+        this.data = data.employees
+        for (let i = 0; i < data.claims.length; i++) {
+          this.apiService.getEmployeeByID(data.claims[i].userId).then((userData: any) => {
+            data.claims[i].userInfor = userData
+          })
+          this.apiService.getPolicyByID(data.claims[i].policyId).then((policyData: any) => {
+            this.apiService.getCompanyByID(policyData.companyId).then((companyData: any) => {
+              policyData.companyInfor = companyData
+            })
+            data.claims[i].policyInfor = policyData
+          })
+        }
+        this.data = data.claims
+        this.paging = Math.ceil(data.totalCount / this.limit)
+      })
+    }
   }
 }

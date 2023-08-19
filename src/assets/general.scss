@@ -4,6 +4,10 @@ $header: #02ff03;
 $footer: #D3E0DC;
 $fontFamily: Arial, sans-serif;
 
+.container{
+  width: 100%!important;
+}
+
 html,
 body {
   height: 100%;
@@ -111,4 +115,41 @@ button a {
 
 tr {
   text-align: center;
+}
+
+#status{
+  border: 2px;
+}
+
+//search+paging
+
+.form-search{
+  margin: 20px auto;
+  width: 50%;
+  margin: 10px auto;
+  display: flex;
+}
+.form-search .inputSearch{
+  padding: 5px;
+  width: 100%;
+  border-radius: 5px;
+}
+.form-search .inputSearch:hover{
+  box-shadow: 0 0 5pt 0.5pt lightblue;
+}
+.form-search .inputSearch:focus{
+  box-shadow: 0 0 10pt 1pt lightblue;
+}
+.paging{
+  text-align: center;
+  padding-bottom: 20px;
+}
+.paging button{
+  margin: 0 5px;
+}
+.sort-container{
+  text-align: center;
+}
+.selectedPage{
+  color: red;
 }

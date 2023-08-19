@@ -1,5 +1,19 @@
+<form action="false" (ngSubmit)="Search(search.value)">
+    <div class="form-search">
+        <input type="text" class="inputSearch" placeholder="Search Company" #search>
+        <div class="">
+            <button class="searchBtn" type="submit"><img src="assets/imgs/search.svg" alt="" /></button>
+        </div>
+    </div>
+    <div class="sort-container">
+        <select class="" (change)="Sort(sortOption.value)" #sortOption>
+            <option value="asc" default>Ascending</option>
+            <option value="desc">Descending</option>
+        </select>
+        <button routerLink="/addclaim">Add</button>
+    </div>
+</form>
 <div class="container">
-    <button routerLink="/addpolicy">Add</button>
     <div class="table-responsive-sm">
         <table class="table table-hover">
             <thead>
@@ -8,6 +22,7 @@
                     <th scope="col">Claimant</th>
                     <th scope="col">Insurer</th>
                     <th scope="col">Policy Name</th>
+                    <th scope="col">Description</th>
                     <th scope="col">Approve Amount</th>
                     <th scope="col">Create Date</th>
                     <th scope="col">Action</th>
@@ -19,13 +34,19 @@
                     <td>{{item.userInfor?.name}}</td>
                     <td>{{item.policyInfor?.companyInfor?.companyName}}</td>
                     <td>{{item.policyInfor?.policyName}}</td>
+                    <td>{{item.description}}</td>
                     <td>{{item.appAmount | number: '1.0-0'}}</td>
                     <td>{{ConvertDateToInput(item.createDate)}}</td>
                     <td align="center">
-                        <button routerLink="/showclaimdetail" [queryParams]="{ claimid: item.claimId }" routerLinkActive="active" class="nav-link">Show Claim details</button>
+                        <button routerLink="/showclaimdetail" [queryParams]="{ claimid: item.claimId }"
+                            routerLinkActive="active" class="nav-link">Show Claim details</button>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
+</div>
+<div class="paging">
+    <button class="{{i+1==currentPage?'selectedPage':''}}" *ngFor="let item of [].constructor(paging); let i = index"
+        (click)="SwitchPage(i+1)">{{i+1}}</button>
 </div>

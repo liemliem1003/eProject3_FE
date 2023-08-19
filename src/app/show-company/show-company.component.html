@@ -1,8 +1,19 @@
-<app-functioninshow></app-functioninshow>
-<div class="container">
-    <div class="function">
+<form action="false" (ngSubmit)="Search(search.value)">
+    <div class="form-search">
+        <input type="text" class="inputSearch" placeholder="Search Company" #search>
+        <div class="">
+            <button class="searchBtn" type="submit"><img src="assets/imgs/search.svg" alt="" /></button>
+        </div>
     </div>
-    <button routerLink="/addcompany">Add</button>
+    <div class="sort-container">
+        <select class="" (change)="Sort(sortOption.value)" #sortOption>
+            <option value="asc"default>Ascending</option>
+            <option value="desc">Descending</option>
+        </select>
+        <button routerLink="/addcompany">Add</button>
+    </div>
+</form>
+<div class="container">
     <div class="table-responsive-sm">
         <table class="table table-hover">
             <thead>
@@ -25,12 +36,18 @@
                     <td>{{company.address}}</td>
                     <td>{{company.url}}</td>
                     <td>{{company.companyPhone}}</td>
-                    <td><span class="{{company.status?'status-active':'status-inactive'}}">{{company.status?'Active':'Inactive'}}</span></td>
+                    <td><span
+                            class="{{company.status?'status-active':'status-inactive'}}">{{company.status?'Active':'Inactive'}}</span>
+                    </td>
                     <td align="center">
-                        <button routerLink="/editcompany" [queryParams]="{ companyID: company.companyId }" routerLinkActive="active" class="nav-link">Edit</button>
+                        <button routerLink="/editcompany" [queryParams]="{ companyID: company.companyId }"
+                            routerLinkActive="active" class="nav-link">Edit</button>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
+</div>
+<div class="paging">
+    <button class="{{i+1==currentPage?'selectedPage':''}}" *ngFor="let item of [].constructor(paging); let i = index" (click)="SwitchPage(i+1)">{{i+1}}</button>
 </div>

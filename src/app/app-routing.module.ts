@@ -50,6 +50,7 @@ const defaultRoute:Routes=
   { path: '**', redirectTo: '/login', pathMatch: 'full' },
 ]
 var routes:Routes=[];
+
 if (logindetail?.user?.role==undefined) {
   routes = defaultRoute;
 }else if(logindetail?.user?.role==1){

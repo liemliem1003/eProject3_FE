@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./functioninshow.component.scss']
 })
 export class FunctioninshowComponent implements OnInit {
-
+  paging:any = 10
   constructor() { }
 
   ngOnInit(): void {

@@ -10,30 +10,59 @@ import { DecimalPipe } from '@angular/common';
   styleUrls: ['./add-claim.component.scss']
 })
 export class AddClaimComponent implements OnInit {
-  JSimg:any
-  policyOnUserData:any
+  JSimg: any
+  policyOnUserData: any
   Form = new FormGroup({
-    name: new FormControl('', [Validators.required]),
-    hotline: new FormControl(),
-    address: new FormControl(),
-    website: new FormControl(),
-    status: new FormControl(),
-    logo: new FormControl('', [Validators.required])
+    name: new FormControl(),
+    phone: new FormControl(),
+    email: new FormControl(),
+    availableAmount: new FormControl(),
+    appAmount: new FormControl(),
+    policyName: new FormControl(),
+    insurer: new FormControl(),
+    description: new FormControl('', [Validators.required])
   })
   constructor(private apiService: ApiService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      this.apiService.getEmployeeByID(params['policyonuserId']).then((data: any) => {
+      this.apiService.getPolicyOnUserID(params['policyonuserId']).then(async (data: any) => {
+        await this.apiService.getEmployeeByID(data.userId).then((userInfor: any) => {
+          data.userInfor = userInfor
+        })
+        await this.apiService.getPolicyByID(data.policyId).then(async (policyId: any) => {
+          data.policyInfor = policyId
+          await this.apiService.getCompanyByID(data.policyInfor.companyId).then((companyInfor: any) => {
+            data.policyInfor.companyInfor = companyInfor
+          })
+        })
+        this.Form.get('name')?.setValue(data.userInfor.name);
+        this.Form.get('phone')?.setValue(data.userInfor.phone);
+        this.Form.get('email')?.setValue(data.userInfor.email);
+        this.Form.get('policyName')?.setValue(data.policyInfor.policyName);
+        this.Form.get('insurer')?.setValue(data.policyInfor.companyInfor.companyName);
+        console.log(data);
         this.policyOnUserData = data
-      console.log(data);
-
       })
-      
+
     })
   }
-  Cancel(){
-    if(window.confirm("Cancel?")){
+  Create() {
+    if (this.Form.status == "VALID") {
+      if (window.confirm("Confirm to Create new Company")) {
+        this.apiService.postCreateClaim(
+          this.Form.controls.description.value,
+          new Date().toISOString(),
+          this.policyOnUserData.userInfor.userId,
+          this.Form.controls.appAmount.value,
+          this.policyOnUserData.policyInfor.policyId
+        )
+      }
+    }
+
+  }
+  Cancel() {
+    if (window.confirm("Cancel?")) {
       this.router.navigate(['/showcompany'])
     }
   }

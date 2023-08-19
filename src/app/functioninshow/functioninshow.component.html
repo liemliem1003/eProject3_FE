@@ -1,8 +1,17 @@
-
-
-<div class="container">
-    <form>
-        <input type="text" class="form-control" placeholder="Input Employee Name">
-        <i class="bi bi-search"></i>
-    </form>
-</div>
+<form action="">
+    <div class="form-search">
+        <input type="text" class="inputSearch" placeholder="Search Company">
+        <div class="">
+            <button class="searchBtn" type="submit"><img src="assets/imgs/search.svg" alt=""/></button>
+        </div>
+    </div>
+    <div class="">
+        <select class="">
+            <option value="asc" default>Ascending</option>
+            <option value="desc">Descending</option>
+        </select>
+    </div>
+    <div class="paging">
+        <button *ngFor="let item of [].constructor(paging); let i = index">{{i+1}}</button>
+    </div>
+</form>

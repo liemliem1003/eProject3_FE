@@ -1,5 +1,19 @@
+<form action="false" (ngSubmit)="Search(search.value)">
+    <div class="form-search">
+        <input type="text" class="inputSearch" placeholder="Search Company" #search>
+        <div class="">
+            <button class="searchBtn" type="submit"><img src="assets/imgs/search.svg" alt="" /></button>
+        </div>
+        <div class="sort-container">
+            <select class="" (change)="Sort(sortOption.value)" #sortOption>
+                <option value="asc"default>Ascending</option>
+                <option value="desc">Descending</option>
+            </select>
+        <button routerLink="/addpolicy">Add</button>
+        </div>
+    </div>
+</form>
 <div class="container">
-    <button routerLink="/addpolicy">Add</button>
     <div class="table-responsive-sm">
         <table class="table table-hover">
             <thead>
@@ -24,10 +38,15 @@
                     <td>{{item.startDate}}</td>
                     <td>{{item.endDate}}</td>
                     <td align="center">
-                        <button routerLink="/addclaim" [queryParams]="{ policyonuserId: item.id }" routerLinkActive="active" class="nav-link">Create Claim</button>
+                        <button routerLink="/addclaim" [queryParams]="{ policyonuserId: item.id }"
+                            routerLinkActive="active" class="nav-link">Create Claim</button>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
+</div>
+<div class="paging">
+    <button class="{{i+1==currentPage?'selectedPage':''}}" *ngFor="let item of [].constructor(paging); let i = index"
+        (click)="SwitchPage(i+1)">{{i+1}}</button>
 </div>

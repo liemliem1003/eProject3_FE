@@ -187,7 +187,15 @@ export class ApiService {
     }
     async getEmployeeByID(id: any) {
         var api = `${this.apiUrl}/Users/${id}`;
-        return this.http.get<any>(api).toPromise();
+        return new Promise((resolve, reject) => {
+            this.http.get<any>(api).subscribe((data: any) => {
+                resolve(data);
+            },
+                (error) => {
+                    resolve(error);
+                }
+            )
+        }).catch()
     }
     putUpdateEmployee(id:any,password:any,name:any,dob:any,email:any,phone:any,address:any,avatar:any,status:any){
         var api = `${this.apiUrl}/Users/update/${id}`
@@ -276,6 +284,30 @@ export class ApiService {
             )
         }).catch()
     }
+    postCreateClaim(description:any,createDate:any,userId:any,appAmount:any,policyId:any){
+        var api = `${this.apiUrl}/Claim/create`;
+        var body = {
+            description: description,
+            createDate: createDate,
+            userId: userId,
+            appAmount: appAmount,
+            status: false,
+            policyId: policyId,
+        }
+        var JSbody = JSON.stringify(body)
+        console.log(body);
+        
+        return new Promise((resolve, reject) => {
+            this.http.post(api, JSbody, this.httpOptions)
+                .subscribe((data: any) => {
+                    resolve(data);
+                },
+                    (error) => {
+                        resolve(error)
+                    })
+        }).catch()
+
+    }
     getClaimByID(id:any,limit?: number, page?: number, sortOrder?: string){
         limit == undefined ? limit = 10 : true
         page == undefined ? page = 1 : true
@@ -296,7 +328,85 @@ export class ApiService {
         }).catch()
     }
     getPolicyOnUserID(id: any) {
-        var api = `${this.apiUrl}/Company/${id}`;
+        id = 1
+        var api = `${this.apiUrl}/PolicyOnUser/${id}`;
         return this.http.get<any>(api).toPromise();
+    }
+    getSearchCompany(name:any,limit?: number, page?: number, sortOrder?: string){
+        limit == undefined ? limit = 10 : true
+        page == undefined ? page = 1 : true
+        sortOrder == undefined ? sortOrder = "asc" : true
+        var api = `${this.apiUrl}/Company/search/${name}?limit=${limit}&page=${page}&sortOrder=${sortOrder}`;
+        return new Promise((resolve, reject) => {
+            this.http.get<any>(api).subscribe((data: any) => {
+                resolve(data);
+            },
+                (error) => {
+                    resolve(error);
+                }
+            )
+        }).catch()
+    }
+    getSearchEmployee(name:any,limit?: number, page?: number, sortOrder?: string){
+        limit == undefined ? limit = 10 : true
+        page == undefined ? page = 1 : true
+        sortOrder == undefined ? sortOrder = "asc" : true
+        var api = `${this.apiUrl}/Users/search/${name}?limit=${limit}&page=${page}&sortOrder=${sortOrder}`;
+        return new Promise((resolve, reject) => {
+            this.http.get<any>(api).subscribe((data: any) => {
+                resolve(data);
+            },
+                (error) => {
+                    resolve(error);
+                }
+            )
+        }).catch()
+    }
+    getSearchPolicy(name:any,limit?: number, page?: number, sortOrder?: string){
+        limit == undefined ? limit = 10 : true
+        page == undefined ? page = 1 : true
+        sortOrder == undefined ? sortOrder = "asc" : true
+        var api = `${this.apiUrl}/Policy/search/${name}?limit=${limit}&page=${page}&sortOrder=${sortOrder}`;
+        return new Promise((resolve, reject) => {
+            this.http.get<any>(api).subscribe((data: any) => {
+                resolve(data);
+            },
+                (error) => {
+                    resolve(error);
+                }
+            )
+        }).catch()
+    }
+    getSearchClaim(name:any,limit?: number, page?: number, sortOrder?: string){
+        limit == undefined ? limit = 10 : true
+        page == undefined ? page = 1 : true
+        sortOrder == undefined ? sortOrder = "asc" : true
+        var api = `${this.apiUrl}/Claim/search/${name}?limit=${limit}&page=${page}&sortOrder=${sortOrder}`;
+        return new Promise((resolve, reject) => {
+            this.http.get<any>(api).subscribe((data: any) => {
+                resolve(data);
+            },
+                (error) => {
+                    resolve(error);
+                }
+            )
+        }).catch()
+    }
+    getSearchPolicyOnUser(name:any,limit?: number, page?: number, sortOrder?: string){
+        limit == undefined ? limit = 10 : true
+        page == undefined ? page = 1 : true
+        sortOrder == undefined ? sortOrder = "asc" : true
+        var api = `${this.apiUrl}/PolicyOnUser/search/${name}?limit=${limit}&page=${page}&sortOrder=${sortOrder}`;
+        console.log(api);
+        
+        return new Promise((resolve, reject) => {
+            this.http.get<any>(api).subscribe((data: any) => {
+                resolve(data);
+            },
+                (error) => {
+                    resolve(error);
+                }
+            )
+        }).catch()
     }
 }
