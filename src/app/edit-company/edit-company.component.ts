@@ -30,8 +30,8 @@ export class EditCompanyComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.apiService.getCompanyByID(params['companyID']).then((data: any) => {
         this.data = data
-        this.Form.controls.name = new FormControl(this.data?.companyName)
-        this.Form.controls.logo = new FormControl(this.data?.logo)
+        this.Form.get('name')?.setValue(this.data?.companyName);
+        this.Form.get('logo')?.setValue(this.data?.logo);
         this.JSimg = this.data?.logo
       })
     })
@@ -66,6 +66,7 @@ export class EditCompanyComponent implements OnInit {
       this.router.navigate(['/showcompany'])
     }
   }
+  //image control
   handleImageInput(event: any) {
     const selectedFile = event.target.files[0];
     if (selectedFile) {
@@ -85,11 +86,9 @@ export class EditCompanyComponent implements OnInit {
         const base64String = event.target.result;
         resolve(base64String);
       };
-
       reader.onerror = (error) => {
         reject(error);
       };
-
       reader.readAsDataURL(file);
     });
   }

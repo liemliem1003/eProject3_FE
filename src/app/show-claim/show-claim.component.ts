@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
 export class ShowClaimComponent implements OnInit {
   data: any
   paging: any
-  limit: any = 1
-  currentPage: any = 2
+  limit: any = 10
+  currentPage: any = 1
   sort: any = 'asc'
   searchvalue: any = ""
 

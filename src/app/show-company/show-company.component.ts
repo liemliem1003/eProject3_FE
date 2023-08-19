@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class ShowCompanyComponent implements OnInit {
   companies: any
   paging: any
-  limit: any = 2
+  limit: any = 10
   currentPage: any = 1
   sort: any = 'asc'
   searchvalue: any = ""

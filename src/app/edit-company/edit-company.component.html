@@ -1,15 +1,3 @@
-<div class="container">
-    <input class="form-control mb-3" type="text" placeholder="Tìm kiếm...">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Tên</th>
-          <th>Email</th>
-        </tr>
-      </thead>
-    </table>
-  </div>
   <div class="container">
     <h2>Edit Insurer Details</h2>
     <form [formGroup]="Form" (ngSubmit)="UpdateCompany(name.value,hotline.value,address.value,website.value,status.checked)" >

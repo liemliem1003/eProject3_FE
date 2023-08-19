@@ -1,19 +1,1 @@
 @import '../../assets/general.scss';
-
-.form-search{
-    margin: 20px auto;
-    width: 50%;
-    margin: 10px auto;
-    display: flex;
-}
-.form-search .inputSearch{
-    padding: 5px;
-    width: 100%;
-    border-radius: 5px;
-}
-.form-search .inputSearch:hover{
-    box-shadow: 0 0 5pt 0.5pt lightblue;
-}
-.form-search .inputSearch:focus{
-    box-shadow: 0 0 10pt 1pt lightblue;
-}

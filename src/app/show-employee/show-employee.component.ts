@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class ShowEmployeeComponent implements OnInit {
   employees: any
   paging: any
-  limit: any = 1
+  limit: any = 10
   currentPage: any = 1
   sort: any = 'asc'
   searchvalue:any =""

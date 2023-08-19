@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class ShowPolicyonuserComponent implements OnInit {
   data:any
   paging: any
-  limit:any = 4
+  limit:any = 10
   currentPage:any = 1
   sort:any='asc'
   searchvalue:any=""

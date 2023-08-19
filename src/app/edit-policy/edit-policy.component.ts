@@ -30,7 +30,7 @@ export class EditPolicyComponent implements OnInit {
     amount: new FormControl(),
     website: new FormControl(),
     status: new FormControl(),
-    banner: new FormControl('', [Validators.required])
+    banner: new FormControl('')
   })
 
   constructor(private route: ActivatedRoute, private apiService: ApiService, private router: Router) { }
@@ -43,21 +43,26 @@ export class EditPolicyComponent implements OnInit {
       }
     })
     this.route.queryParams.subscribe(params => {
+
       this.apiService.getPolicyByID(params['policyID']).then((data: any) => {
         this.data = data
         this.Form.get('name')?.setValue(this.data?.policyName);
         this.Form.get('description')?.setValue(this.data?.desciption);
         this.data.company = this.companies[data.companyId]
-        this.Form.controls.description = new FormControl()
-        this.Form.controls.banner = new FormControl(this.data?.banner)
+        // this.Form.get('banner')?.setValue(this.data?.banner);
+        // this.Form.controls.banner = new FormControl(this.data?.banner)
         this.JSimg = this.data?.banner
+        
       })
     })
   }
 
   Update(policyName:any,description:any,totalAmount:any,duration:any,companyId:any,status:any){
-    this.Form.controls.name = new FormControl(policyName==""?null:policyName,[Validators.required])
-    this.Form.controls.description = new FormControl(description==""?null:description,[Validators.required])
+    // this.Form.controls.name = new FormControl(policyName==""?null:policyName,[Validators.required])
+    // this.Form.controls.description = new FormControl(description==""?null:description,[Validators.required])
+    console.log(this.Form);
+    console.log(this.JSimg);
+    
     if (this.Form.status == "VALID") {
       if(window.confirm("Update?")){
         this.apiService.putUpdatePolicy(
