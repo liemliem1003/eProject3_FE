@@ -42,6 +42,7 @@ const employeeRoute: Routes= [
   { path: 'addclaim', component: AddClaimComponent },
   { path: 'showclaim', component: ShowClaimComponent },
   { path: 'editemployee', component: EditEmployeeComponent },
+  { path: 'showpolicyonuser', component: ShowPolicyonuserComponent },
   { path: 'showclaimdetail', component: ShowClaimdetailComponent },
   { path: '**', redirectTo: '/showclaim', pathMatch: 'full' },
 ];

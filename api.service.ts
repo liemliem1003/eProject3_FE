@@ -284,6 +284,37 @@ export class ApiService {
             )
         }).catch()
     }
+    getClaimsByUserId(id:any,limit?: number, page?: number, sortOrder?: string) {
+        limit == undefined ? limit = 10 : true
+        page == undefined ? page = 1 : true
+        sortOrder == undefined ? sortOrder = "asc" : true
+        var api = `${this.apiUrl}/Claim/claimbyuser/${id}?limit=${limit}&page=${page}&sortOrder=${sortOrder}`;
+        return new Promise((resolve, reject) => {
+            this.http.get<any>(api).subscribe((data: any) => {
+                resolve(data);
+            },
+                (error) => {
+                    resolve(error);
+                }
+            )
+        }).catch()
+    }
+    getPolicyOnUserByUserId(id:any,limit?: number, page?: number, sortOrder?: string) {
+        limit == undefined ? limit = 10 : true
+        page == undefined ? page = 1 : true
+        sortOrder == undefined ? sortOrder = "asc" : true
+        var api = `${this.apiUrl}/PolicyOnUser/getbyuserid/${id}?limit=${limit}&page=${page}&sortOrder=${sortOrder}`;
+        return new Promise((resolve, reject) => {
+            this.http.get<any>(api).subscribe((data: any) => {
+                resolve(data);
+            },
+                (error) => {
+                    resolve(error);
+                }
+            )
+        }).catch()
+    }
+
     postCreateClaim(description:any,createDate:any,userId:any,appAmount:any,policyId:any){
         var api = `${this.apiUrl}/Claim/create`;
         var body = {

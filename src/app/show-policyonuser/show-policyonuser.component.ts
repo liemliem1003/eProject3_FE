@@ -9,6 +9,7 @@ import { parse, format } from 'date-fns';
   styleUrls: ['./show-policyonuser.component.scss']
 })
 export class ShowPolicyonuserComponent implements OnInit {
+  logindetail = JSON.parse(localStorage.getItem("dataLogin") || "{}")
   data:any
   paging: any
   limit:any = 10
@@ -26,27 +27,54 @@ export class ShowPolicyonuserComponent implements OnInit {
   constructor(private apiService: ApiService, private router: Router) { }
 
   ngOnInit(): void {
-    this.apiService.getPolicyOnUser(this.limit, this.currentPage, this.sort).then((data: any) => {
-      this.paging = Math.ceil(data.totalCount / this.limit)
-      data = data.policyOnUsers
-      for (let i = 0; i < data.length; i++) {
-        data[i].endDate = this.ConvertDateToInput(data[i].endDate)
-        data[i].startDate = this.ConvertDateToInput(data[i].startDate)
-        this.apiService.getEmployeeByID(data[i].userId).then((userData:any)=>{
-          data[i].userInfor = userData
-        })
-        this.apiService.getPolicyByID(data[i].policyId).then((policyData:any)=>{
-          this.apiService.getCompanyByID(policyData.companyId).then((companyData:any)=>{
-            policyData.companyInfor = companyData
+    if (this.logindetail.user.role == 2) {
+      this.apiService.getPolicyOnUserByUserId(this.logindetail.user.userId,this.limit, this.currentPage, this.sort).then((data: any) => {
+        console.log(data);
+        
+        this.paging = Math.ceil(data.totalCount / this.limit)
+        data = data.policiesOnUser 
+        for (let i = 0; i < data.length; i++) {
+          data[i].endDate = this.ConvertDateToInput(data[i].endDate)
+          data[i].startDate = this.ConvertDateToInput(data[i].startDate)
+          this.apiService.getEmployeeByID(data[i].userId).then((userData:any)=>{
+            data[i].userInfor = userData
           })
-          data[i].policyInfor = policyData
-        })
-        data[i].disabled = this.ActivateClaim(data[i].startDate,data[i].endDate)
-      }
-      this.data = data
-      console.log(data);
-      
-    })
+          this.apiService.getPolicyByID(data[i].policyId).then((policyData:any)=>{
+            this.apiService.getCompanyByID(policyData.companyId).then((companyData:any)=>{
+              policyData.companyInfor = companyData
+            })
+            data[i].policyInfor = policyData
+          })
+          data[i].disabled = this.ActivateClaim(data[i].startDate,data[i].endDate)
+        }
+        this.data = data
+        console.log(data);
+        
+      })
+    }else{
+      this.apiService.getPolicyOnUser(this.limit, this.currentPage, this.sort).then((data: any) => {
+        this.paging = Math.ceil(data.totalCount / this.limit)
+        data = data.policyOnUsers
+        for (let i = 0; i < data.length; i++) {
+          data[i].endDate = this.ConvertDateToInput(data[i].endDate)
+          data[i].startDate = this.ConvertDateToInput(data[i].startDate)
+          this.apiService.getEmployeeByID(data[i].userId).then((userData:any)=>{
+            data[i].userInfor = userData
+          })
+          this.apiService.getPolicyByID(data[i].policyId).then((policyData:any)=>{
+            this.apiService.getCompanyByID(policyData.companyId).then((companyData:any)=>{
+              policyData.companyInfor = companyData
+            })
+            data[i].policyInfor = policyData
+          })
+          data[i].disabled = this.ActivateClaim(data[i].startDate,data[i].endDate)
+        }
+        this.data = data
+        console.log(data);
+        
+      })
+    }
+    
   }
   // Date control
   ConvertDateToInput(inputDate: any) {
@@ -113,56 +141,111 @@ export class ShowPolicyonuserComponent implements OnInit {
   Sort(option: any) {
     this.sort = option
     this.currentPage = 1
-    if (this.searchvalue == "") {
-      this.apiService.getPolicyOnUser(this.limit, this.currentPage, this.sort).then((data: any) => {
-        this.paging = Math.ceil(data.totalCount / this.limit)
-        data = data.policyOnUsers
-        for (let i = 0; i < data.length; i++) {
-          data[i].endDate = this.ConvertDateToInput(data[i].endDate)
-          data[i].startDate = this.ConvertDateToInput(data[i].startDate)
-          this.apiService.getEmployeeByID(data[i].userId).then((userData:any)=>{
-            data[i].userInfor = userData
-          })
-          this.apiService.getPolicyByID(data[i].policyId).then((policyData:any)=>{
-            this.apiService.getCompanyByID(policyData.companyId).then((companyData:any)=>{
-              policyData.companyInfor = companyData
+    if (this.logindetail.user.role == 2) {
+      if (this.searchvalue == "") {
+        this.apiService.getPolicyOnUserByUserId(this.logindetail.user.userId,this.limit, this.currentPage, this.sort).then((data: any) => {
+          this.paging = Math.ceil(data.totalCount / this.limit)
+          data = data.policiesOnUser
+          for (let i = 0; i < data.length; i++) {
+            data[i].endDate = this.ConvertDateToInput(data[i].endDate)
+            data[i].startDate = this.ConvertDateToInput(data[i].startDate)
+            this.apiService.getEmployeeByID(data[i].userId).then((userData:any)=>{
+              data[i].userInfor = userData
             })
-            data[i].policyInfor = policyData
-          })
-        }
-        this.data = data
-      })
-    } else {
-      this.apiService.getSearchEmployee(this.searchvalue, this.limit, this.currentPage, this.sort).then((data: any) => {
-        this.data = data.employees
-        console.log(data);
-        this.paging = Math.ceil(data.totalCount / this.limit)
-        this.currentPage = 1
-      })
+            this.apiService.getPolicyByID(data[i].policyId).then((policyData:any)=>{
+              this.apiService.getCompanyByID(policyData.companyId).then((companyData:any)=>{
+                policyData.companyInfor = companyData
+              })
+              data[i].policyInfor = policyData
+            })
+          }
+          this.data = data
+        })
+      } else {
+        this.apiService.getSearchEmployee(this.searchvalue, this.limit, this.currentPage, this.sort).then((data: any) => {
+          this.data = data.employees
+          console.log(data);
+          this.paging = Math.ceil(data.totalCount / this.limit)
+          this.currentPage = 1
+        })
+      }
+    }else{
+      if (this.searchvalue == "") {
+        this.apiService.getPolicyOnUser(this.limit, this.currentPage, this.sort).then((data: any) => {
+          this.paging = Math.ceil(data.totalCount / this.limit)
+          data = data.policyOnUsers
+          for (let i = 0; i < data.length; i++) {
+            data[i].endDate = this.ConvertDateToInput(data[i].endDate)
+            data[i].startDate = this.ConvertDateToInput(data[i].startDate)
+            this.apiService.getEmployeeByID(data[i].userId).then((userData:any)=>{
+              data[i].userInfor = userData
+            })
+            this.apiService.getPolicyByID(data[i].policyId).then((policyData:any)=>{
+              this.apiService.getCompanyByID(policyData.companyId).then((companyData:any)=>{
+                policyData.companyInfor = companyData
+              })
+              data[i].policyInfor = policyData
+            })
+          }
+          this.data = data
+        })
+      } else {
+        this.apiService.getSearchEmployee(this.searchvalue, this.limit, this.currentPage, this.sort).then((data: any) => {
+          this.data = data.employees
+          console.log(data);
+          this.paging = Math.ceil(data.totalCount / this.limit)
+          this.currentPage = 1
+        })
+      }
     }
+    
   }
   SwitchPage(page: any) {
     this.currentPage = page
-    if(this.searchvalue==""){
-      this.apiService.getPolicyOnUser(this.limit, this.currentPage, this.sort).then((data: any) => {
-        this.paging = Math.ceil(data.totalCount / this.limit)
-        data = data.policyOnUsers
-        for (let i = 0; i < data.length; i++) {
-          data[i].endDate = this.ConvertDateToInput(data[i].endDate)
-          data[i].startDate = this.ConvertDateToInput(data[i].startDate)
-          this.apiService.getEmployeeByID(data[i].userId).then((userData:any)=>{
-            data[i].userInfor = userData
-          })
-          this.apiService.getPolicyByID(data[i].policyId).then((policyData:any)=>{
-            this.apiService.getCompanyByID(policyData.companyId).then((companyData:any)=>{
-              policyData.companyInfor = companyData
+    if (this.logindetail.user.role == 2) {
+      if(this.searchvalue==""){
+        this.apiService.getPolicyOnUserByUserId(this.logindetail.user.userId,this.limit, this.currentPage, this.sort).then((data: any) => {
+          this.paging = Math.ceil(data.totalCount / this.limit)
+          data = data.policiesOnUser
+          for (let i = 0; i < data.length; i++) {
+            data[i].endDate = this.ConvertDateToInput(data[i].endDate)
+            data[i].startDate = this.ConvertDateToInput(data[i].startDate)
+            this.apiService.getEmployeeByID(data[i].userId).then((userData:any)=>{
+              data[i].userInfor = userData
             })
-            data[i].policyInfor = policyData
-          })
-        }
-        this.data = data
-      })
+            this.apiService.getPolicyByID(data[i].policyId).then((policyData:any)=>{
+              this.apiService.getCompanyByID(policyData.companyId).then((companyData:any)=>{
+                policyData.companyInfor = companyData
+              })
+              data[i].policyInfor = policyData
+            })
+          }
+          this.data = data
+        })
+      }
+    }else{
+      if(this.searchvalue==""){
+        this.apiService.getPolicyOnUser(this.limit, this.currentPage, this.sort).then((data: any) => {
+          this.paging = Math.ceil(data.totalCount / this.limit)
+          data = data.policyOnUsers
+          for (let i = 0; i < data.length; i++) {
+            data[i].endDate = this.ConvertDateToInput(data[i].endDate)
+            data[i].startDate = this.ConvertDateToInput(data[i].startDate)
+            this.apiService.getEmployeeByID(data[i].userId).then((userData:any)=>{
+              data[i].userInfor = userData
+            })
+            this.apiService.getPolicyByID(data[i].policyId).then((policyData:any)=>{
+              this.apiService.getCompanyByID(policyData.companyId).then((companyData:any)=>{
+                policyData.companyInfor = companyData
+              })
+              data[i].policyInfor = policyData
+            })
+          }
+          this.data = data
+        })
+      }
     }
+    
   }
   ActivateClaim(start:any,end:any){
     const currentDate = new Date();
