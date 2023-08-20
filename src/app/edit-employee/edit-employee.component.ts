@@ -118,8 +118,6 @@ export class EditEmployeeComponent implements OnInit {
     this.imgToshow = data
     data = data.split(",")
     this.JSimg = data[1]
-    console.log(this.JSimg);
-    
   }
   Cancel() {
     if (window.confirm("Cancel?")) {

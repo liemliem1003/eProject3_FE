@@ -1,0 +1,17 @@
+<div class="container">
+    <h2 class="text-center mb-4">About Us</h2>
+    <div class="row">
+      <div class="col-md-4 mb-4" *ngFor="let member of members">
+        <div class="card {{member.leader?'cover':''}}">
+          <img src="{{ member.avatar }}" class="card-img-top" alt="Avatar">
+          <div class="card-body">
+            <h5 class="card-title">{{ member.name }}</h5>
+            <p class="card-text">Phone: {{ member.phone }}</p>
+            <p class="card-text">Email: {{ member.email }}</p>
+            <p class="card-text leader" *ngIf="member.leader == true">Leader</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

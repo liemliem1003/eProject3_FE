@@ -27,10 +27,9 @@ export class ShowPolicyonuserComponent implements OnInit {
   constructor(private apiService: ApiService, private router: Router) { }
 
   ngOnInit(): void {
+    
     if (this.logindetail.user.role == 2) {
       this.apiService.getPolicyOnUserByUserId(this.logindetail.user.userId,this.limit, this.currentPage, this.sort).then((data: any) => {
-        console.log(data);
-        
         this.paging = Math.ceil(data.totalCount / this.limit)
         data = data.policiesOnUser 
         for (let i = 0; i < data.length; i++) {
@@ -48,8 +47,6 @@ export class ShowPolicyonuserComponent implements OnInit {
           data[i].disabled = this.ActivateClaim(data[i].startDate,data[i].endDate)
         }
         this.data = data
-        console.log(data);
-        
       })
     }else{
       this.apiService.getPolicyOnUser(this.limit, this.currentPage, this.sort).then((data: any) => {
@@ -70,8 +67,6 @@ export class ShowPolicyonuserComponent implements OnInit {
           data[i].disabled = this.ActivateClaim(data[i].startDate,data[i].endDate)
         }
         this.data = data
-        console.log(data);
-        
       })
     }
     
@@ -90,7 +85,6 @@ export class ShowPolicyonuserComponent implements OnInit {
     this.currentPage = 1
     if (value == "") {
       this.apiService.getPolicyOnUser(this.limit, this.currentPage, this.sort).then((data: any) => {
-        console.log(data);
         this.paging = Math.ceil(data.totalCount / this.limit)
         data = data.policyOnUsers
         for (let i = 0; i < data.length; i++) {
@@ -110,8 +104,6 @@ export class ShowPolicyonuserComponent implements OnInit {
       })
     } else {
       this.apiService.getSearchPolicyOnUser(value,this.limit, this.currentPage, this.sort).then((data: any) => {
-        console.log(data);
-
         this.paging = Math.ceil(data.TotalCount / this.limit)
         data = data.PolicyOnUsers["$values"]
         for (let i = 0; i < data.length; i++) {
@@ -164,7 +156,6 @@ export class ShowPolicyonuserComponent implements OnInit {
       } else {
         this.apiService.getSearchEmployee(this.searchvalue, this.limit, this.currentPage, this.sort).then((data: any) => {
           this.data = data.employees
-          console.log(data);
           this.paging = Math.ceil(data.totalCount / this.limit)
           this.currentPage = 1
         })
@@ -192,7 +183,6 @@ export class ShowPolicyonuserComponent implements OnInit {
       } else {
         this.apiService.getSearchEmployee(this.searchvalue, this.limit, this.currentPage, this.sort).then((data: any) => {
           this.data = data.employees
-          console.log(data);
           this.paging = Math.ceil(data.totalCount / this.limit)
           this.currentPage = 1
         })

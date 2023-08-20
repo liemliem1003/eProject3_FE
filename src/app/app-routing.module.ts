@@ -15,6 +15,7 @@ import { ShowPolicyonuserComponent } from './show-policyonuser/show-policyonuser
 import { ShowClaimComponent } from './show-claim/show-claim.component';
 import { AddClaimComponent } from './add-claim/add-claim.component';
 import { ShowClaimdetailComponent } from './show-claimdetail/show-claimdetail.component';
+import { AboutusComponent } from './aboutus/aboutus.component';
 
 var logindetail = JSON.parse(localStorage.getItem("dataLogin") || "{}")
 
@@ -34,6 +35,7 @@ const adminRoute: Routes = [
   { path: 'addclaim', component: AddClaimComponent },
   { path: 'showclaim', component: ShowClaimComponent },
   { path: 'showclaimdetail', component: ShowClaimdetailComponent },
+  { path: 'aboutus', component: AboutusComponent },
   { path: '**', redirectTo: '/login', pathMatch: 'full' },
 ];
 
@@ -44,12 +46,14 @@ const employeeRoute: Routes= [
   { path: 'editemployee', component: EditEmployeeComponent },
   { path: 'showpolicyonuser', component: ShowPolicyonuserComponent },
   { path: 'showclaimdetail', component: ShowClaimdetailComponent },
+  { path: 'aboutus', component: AboutusComponent },
   { path: '**', redirectTo: '/showclaim', pathMatch: 'full' },
 ];
 
 const defaultRoute:Routes=
 [
   { path: 'login', component: LoginComponent },
+  { path: 'aboutus', component: AboutusComponent },
   { path: '**', redirectTo: '/login', pathMatch: 'full' },
 ]
 var routes:Routes=[];

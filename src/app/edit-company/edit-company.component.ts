@@ -35,8 +35,6 @@ export class EditCompanyComponent implements OnInit {
         this.Form.get('logo')?.setValue(this.data?.logo);
         this.JSimg = this.data?.logo
         this.imgToshow = `http://localhost:3000/${this.data?.logo}`
-        console.log(data.logo);
-        
       })
     })
   }

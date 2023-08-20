@@ -326,8 +326,6 @@ export class ApiService {
             policyId: policyId,
         }
         var JSbody = JSON.stringify(body)
-        console.log(body);
-        
         return new Promise((resolve, reject) => {
             this.http.post(api, JSbody, this.httpOptions)
                 .subscribe((data: any) => {
@@ -348,18 +346,18 @@ export class ApiService {
     }
     postApproveClaim(id:any){
         var api = `${this.apiUrl}/Claim/approve/${id}`;
+        var JSbody =''
         return new Promise((resolve, reject) => {
-            this.http.get<any>(api).subscribe((data: any) => {
-                resolve(data);
-            },
-                (error) => {
-                    resolve(error);
-                }
-            )
+            this.http.post(api, JSbody, this.httpOptions)
+                .subscribe((data: any) => {
+                    resolve(data);
+                },
+                    (error) => {
+                        resolve(error)
+                    })
         }).catch()
     }
     getPolicyOnUserID(id: any) {
-        id = 1
         var api = `${this.apiUrl}/PolicyOnUser/${id}`;
         return this.http.get<any>(api).toPromise();
     }
@@ -428,8 +426,6 @@ export class ApiService {
         page == undefined ? page = 1 : true
         sortOrder == undefined ? sortOrder = "asc" : true
         var api = `${this.apiUrl}/PolicyOnUser/search/${name}?limit=${limit}&page=${page}&sortOrder=${sortOrder}`;
-        console.log(api);
-        
         return new Promise((resolve, reject) => {
             this.http.get<any>(api).subscribe((data: any) => {
                 resolve(data);
@@ -447,8 +443,6 @@ export class ApiService {
             url: img,
         }
         var JSbody = JSON.stringify(body)
-        console.log(body);
-        
         return new Promise((resolve, reject) => {
             this.http.post(api, JSbody, this.httpOptions)
                 .subscribe((data: any) => {

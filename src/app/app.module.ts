@@ -22,6 +22,7 @@ import { AddClaimComponent } from './add-claim/add-claim.component';
 import { ShowClaimComponent } from './show-claim/show-claim.component';
 import { ShowClaimdetailComponent } from './show-claimdetail/show-claimdetail.component';
 import { FunctioninshowComponent } from './functioninshow/functioninshow.component';
+import { AboutusComponent } from './aboutus/aboutus.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { FunctioninshowComponent } from './functioninshow/functioninshow.compone
     ShowClaimComponent,
     ShowClaimdetailComponent,
     FunctioninshowComponent,
+    AboutusComponent,
   ],
   imports: [
     BrowserModule,

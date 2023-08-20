@@ -19,7 +19,6 @@ export class ShowCompanyComponent implements OnInit {
 
   ngOnInit(): void {
     this.apiService.getAllCompanies(this.limit, this.currentPage, this.sort).then((data: any) => {
-      console.log(data);
       this.paging = Math.ceil(data.totalCount / this.limit)
       this.companies = data.companies
     })
@@ -28,13 +27,11 @@ export class ShowCompanyComponent implements OnInit {
     this.currentPage = page
     if (this.searchvalue == "") {
       this.apiService.getAllCompanies(this.limit, this.currentPage, this.sort).then((data: any) => {
-        console.log(data);
         this.paging = Math.ceil(data.totalCount / this.limit)
         this.companies = data.companies
       })
     } else {
       this.apiService.getSearchCompany(this.searchvalue, this.limit, this.currentPage, this.sort).then((data: any) => {
-        console.log(data);
         this.paging = Math.ceil(data.totalCount / this.limit)
         this.companies = data.companies
       })
@@ -45,13 +42,11 @@ export class ShowCompanyComponent implements OnInit {
     this.currentPage = 1
     if (this.searchvalue == "") {
       this.apiService.getAllCompanies(this.limit, this.currentPage, this.sort).then((data: any) => {
-        console.log(data);
         this.paging = Math.ceil(data.totalCount / this.limit)
         this.companies = data.companies
       })
     } else {
       this.apiService.getSearchCompany(this.searchvalue, this.limit, this.currentPage, this.sort).then((data: any) => {
-        console.log(data);
         this.paging = Math.ceil(data.totalCount / this.limit)
         this.companies = data.companies
       })
@@ -62,14 +57,12 @@ export class ShowCompanyComponent implements OnInit {
     this.currentPage = 1
     if (value != "") {
       this.apiService.getSearchCompany(value, this.limit, this.currentPage, this.sort).then((data: any) => {
-        console.log(data);
         this.companies = data.companies
         this.paging = Math.ceil(data.totalCount / this.limit)
         this.currentPage = 1
       })
     } else {
       this.apiService.getAllCompanies(this.limit, this.currentPage, this.sort).then((data: any) => {
-        console.log(data);
         this.paging = Math.ceil(data.totalCount / this.limit)
         this.companies = data.companies
       })

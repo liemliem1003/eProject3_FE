@@ -19,7 +19,6 @@ export class ShowEmployeeComponent implements OnInit {
   ngOnInit(): void {
     this.apiService.getEmployees(this.limit, this.currentPage, this.sort).then((data: any) => {
       this.employees = data.employees
-      console.log(data);
       this.paging = Math.ceil(data.totalCount / this.limit)
     })
   }
@@ -52,7 +51,6 @@ export class ShowEmployeeComponent implements OnInit {
     } else {
       this.apiService.getSearchEmployee(this.searchvalue, this.limit, this.currentPage, this.sort).then((data: any) => {
         this.employees = data.employees
-        console.log(data);
         this.paging = Math.ceil(data.totalCount / this.limit)
         this.currentPage = 1
       })

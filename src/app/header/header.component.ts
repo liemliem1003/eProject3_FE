@@ -16,7 +16,6 @@ export class HeaderComponent implements OnInit {
     if (this.logindetail.userId == undefined && this.login) {
       this.apiService.getEmployeeByID(this.logindetail.user.userId).then((data: any) => {
         this.logindetail = data
-        console.log(data);
       })
     }
   }

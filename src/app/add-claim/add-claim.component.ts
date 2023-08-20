@@ -29,6 +29,7 @@ export class AddClaimComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.apiService.getPolicyOnUserID(params['policyonuserId']).then(async (data: any) => {
+        
         await this.apiService.getEmployeeByID(data.userId).then((userInfor: any) => {
           data.userInfor = userInfor
         })
@@ -62,7 +63,6 @@ export class AddClaimComponent implements OnInit {
               var img = this.listImgClaim[i].split(",");
               img = img[1]
               await this.apiService.postUploadImgForClaim(data.claimId,img).then((data)=>{
-                console.log(data);
               })
             }
             alert("Create successfully")
@@ -120,7 +120,5 @@ export class AddClaimComponent implements OnInit {
       this.listImgClaim.splice(id,1)
       upload.value = ""
     }
-    console.log();
-    
   }
 }

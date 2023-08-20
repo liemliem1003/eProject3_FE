@@ -20,8 +20,6 @@ export class ShowClaimdetailComponent implements OnInit {
   constructor(private route: ActivatedRoute, private apiService: ApiService, private router: Router) { }
 
   ngOnInit(): void {
-    console.log(this.loginUserData);
-
     this.route.queryParams.subscribe(params => {
       this.apiService.getClaimByID(params['claimid']).then((data: any) => {
         this.apiService.getEmployeeByID(data.userId).then((userData: any) => {
@@ -37,10 +35,7 @@ export class ShowClaimdetailComponent implements OnInit {
         this.data = data
         this.apiService.getLoadIamgeByClaimID(data.claimId).then((imgs) => {
           this.listCurrentImgs = imgs;
-          console.log(imgs);
-
         })
-        console.log(data);
       })
     })
   }
@@ -51,7 +46,6 @@ export class ShowClaimdetailComponent implements OnInit {
           var img = this.listImgClaim[i].split(",");
           img = img[1]
           await this.apiService.postUploadImgForClaim(this.data.claimId, img).then((data: any) => {
-            console.log(data);
           })
         }
         alert("Update successfully")
@@ -125,7 +119,5 @@ export class ShowClaimdetailComponent implements OnInit {
       this.listImgClaim.splice(id, 1)
       upload.value = ""
     }
-    console.log();
-
   }
 }

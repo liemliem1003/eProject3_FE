@@ -55,7 +55,6 @@ export class AddCompanyComponent implements OnInit {
 
 //
   handleImageInput(event: any) {
-    console.log(event);
     const selectedFile = event.target.files[0];
     if (selectedFile) {
       this.convertImageToBase64(selectedFile);

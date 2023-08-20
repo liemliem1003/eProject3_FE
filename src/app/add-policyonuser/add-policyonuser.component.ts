@@ -44,7 +44,6 @@ export class AddPolicyonuserComponent implements OnInit {
           this.Form.controls.endDate.value,
           this.availablePolicy[Number(this.Form.controls.selectedPolicy.value)].totalAmount
         ).then((data: any) => {
-          console.log(data);
           if (data.avaibleAmount != 0 && data.avaibleAmount != undefined) {
             alert("Success")
             this.router.navigate(['/showemployee'])

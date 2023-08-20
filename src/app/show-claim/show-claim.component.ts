@@ -34,7 +34,6 @@ export class ShowClaimComponent implements OnInit {
             data.claims[i].policyInfor = policyData
           })
         }
-        console.log(data);
         this.data = data.claims
 
       })
@@ -52,8 +51,6 @@ export class ShowClaimComponent implements OnInit {
             data.claims[i].policyInfor = policyData
           })
         }
-        console.log(data);
-
         this.data = data.claims
       })
     }
@@ -89,8 +86,6 @@ export class ShowClaimComponent implements OnInit {
     } else {
       this.apiService.getSearchClaim(value, this.limit, this.currentPage, this.sort).then((data: any) => {
         this.data = data.employees
-        console.log(data.Claims);
-        console.log(data.Claims['$id']);
 
         for (let i = 0; i < data.claims.length; i++) {
           this.apiService.getEmployeeByID(data.claims[i].userId).then((userData: any) => {

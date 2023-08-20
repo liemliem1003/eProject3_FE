@@ -31,7 +31,6 @@ export class ShowPolicyComponent implements OnInit {
       for (let i = 0; i < this.policies.length; i++) {
         this.policies[i].company = this.companies[this.policies[i].companyId]
       }
-      console.log(data);
     })
   }
   Search(value: any) {
@@ -44,7 +43,6 @@ export class ShowPolicyComponent implements OnInit {
         for (let i = 0; i < this.policies.length; i++) {
           this.policies[i].company = this.companies[this.policies[i].companyId]
         }
-        console.log(data);
       })
     } else {
       this.apiService.getSearchPolicy(value, this.limit, this.currentPage, this.sort).then((data: any) => {
@@ -53,7 +51,6 @@ export class ShowPolicyComponent implements OnInit {
         for (let i = 0; i < this.policies.length; i++) {
           this.policies[i].company = this.companies[this.policies[i].companyId]
         }
-        console.log(data);
       })
     }
     return false
@@ -77,7 +74,6 @@ export class ShowPolicyComponent implements OnInit {
         for (let i = 0; i < this.policies.length; i++) {
           this.policies[i].company = this.companies[this.policies[i].companyId]
         }
-        console.log(data);
       })
     }
     
@@ -100,7 +96,6 @@ export class ShowPolicyComponent implements OnInit {
         for (let i = 0; i < this.policies.length; i++) {
           this.policies[i].company = this.companies[this.policies[i].companyId]
         }
-        console.log(data);
       })
     }
   }

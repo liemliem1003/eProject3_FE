@@ -57,11 +57,6 @@ export class EditPolicyComponent implements OnInit {
   }
 
   Update(policyName:any,description:any,totalAmount:any,duration:any,companyId:any,status:any){
-    // this.Form.controls.name = new FormControl(policyName==""?null:policyName,[Validators.required])
-    // this.Form.controls.description = new FormControl(description==""?null:description,[Validators.required])
-    console.log(this.Form);
-    console.log(this.JSimg);
-    
     if (this.Form.status == "VALID") {
       if(window.confirm("Update?")){
         this.apiService.putUpdatePolicy(
