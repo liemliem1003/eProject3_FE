@@ -1,40 +1,55 @@
-<app-functioninshow></app-functioninshow>
-<div class="container">
-    <h2>Approve Claim</h2>
-    <div class="form-group">
-        <label for="name">Policy Name</label>
-        <input type="text" class="form-control" name="name" readonly value="{{data?.policyInfor?.policyName}}">
-    </div>
-    <div class="form-group">
-        <label for="name">Insurer</label>
-        <input type="text" class="form-control" name="name" readonly value="{{data?.policyInfor?.companyInfor?.companyName}}">
-    </div>
-    <<div class="form-group">
-        <label for="name">Create Date</label>
-        <input type="date" class="form-control" name="name" readonly value="{{data?.createDate}}">
-    </div>
-    <div class="form-group">
-        <label for="name">Employee Name</label>
-        <input type="text" class="form-control" name="name" readonly value="{{data?.userInfor?.name}}">
-    </div>
-    <div class="form-group">
-        <label for="name">Phone</label>
-        <input type="text" class="form-control" name="name" readonly value="{{data?.userInfor?.phone}}">
-    </div>
-    <div class="form-group">
-        <label for="name">Email</label>
-        <input type="text" class="form-control" name="name" readonly value="{{data?.userInfor?.email}}">
-    </div>
-    <div class="form-group">
-        <label for="name">Address</label>
-        <input type="text" class="form-control" name="name" readonly value="{{data?.userInfor?.address}}">
-    </div>
-    <div class="form-group">
-        <label for="name">Approve Amount</label>
-        <input type="date" class="form-control" name="name" readonly value="{{data?.approveAmount}}">
-    </div>
-    <div class="btn-group">
-        <button type="submit" class="btn btn-adding">Approve</button>
-        <button type="button" class="btn cancel" (click)="Cancel()">Cancel</button>
-    </div>
+<div class="create-form">
+    <h2>Claim</h2>
+    <form (ngSubmit)="UpdateClaim()">
+        <div class="form-item">
+            <label for="name">Employee Name</label>
+            <input type="text" class="" #name value="{{data?.userInfor?.name}}" readonly>
+        </div>
+        <div class="form-item">
+            <label for="phone">Phone</label>
+            <input type="text" value="{{data?.userInfor?.phone}}" #phone  readonly>
+        </div>
+        <div class="form-item">
+            <label for="email">Email</label>
+            <input type="text" value="{{data?.userInfor?.email}}" #email  readonly>
+        </div>
+        <div class="form-item">
+            <label for="policyName">Policy</label>
+            <input type="text" value="{{data?.policyInfor?.policyName}}" #policyName  readonly>
+        </div>
+        <div class="form-item">
+            <label for="insurer">Insurer</label>
+            <input type="text" value="{{data?.policyInfor?.companyInfor?.companyName}}" #insurer  readonly>
+        </div>
+        <div class="form-item">
+            <label for="description">Description</label>
+            <input type="text" value="{{data?.description}}"  >
+        </div>
+        <div class="form-item">
+            <label for="appAmount">Amount</label>
+            <input type="text" value="{{data?.appAmount | number: '1.0-0'}}" #appAmount readonly>
+        </div>
+        <div class="form-item">
+            <label for="logo">Upload Images</label>
+            <input type="file" (change)="handleImageInput($event)" #upload>
+        </div>
+        <div class="form-item" *ngIf="listCurrentImgs.length!=0">
+            <label for="">Uploaded Images</label>
+            <div *ngFor="let item of listCurrentImgs" style="position: relative; width: 150px; height: 150px;margin: auto;">
+                <img src="http://localhost:3000/{{item.url}}" alt="" class="showLogoImg">
+            </div>
+        </div>
+        <div class="form-item" *ngIf="listImgClaim.length!=0">
+            <label for="">New Images</label>
+            <i>click on the image to remove</i>
+            <div *ngFor="let item of listImgClaim; let i = index" style="position: relative; width: 150px; height: 150px;margin: auto;">
+                <img src="{{item}}" alt="" class="showLogoImg" (click)="RemoveImg(i,upload)">
+            </div>
+        </div>
+        <div class="btn-group">
+            <button type="button" class="btn btn-approve" *ngIf="data?.status==false&&loginUserData?.user?.role==1" (click)="ApproveClaim()"  >Aprove</button>
+            <button type="submit" class="btn btn-adding">Update claim</button>
+            <button type="button" class="btn cancel" (click)="Cancel()">Cancel</button>
+        </div>
+    </form>
 </div>

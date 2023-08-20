@@ -1,51 +1,45 @@
-<form action="false" (ngSubmit)="Search(search.value)">
-    <div class="form-search">
-        <input type="text" class="inputSearch" placeholder="Search Company" #search>
-        <div class="">
-            <button class="searchBtn" type="submit"><img src="assets/imgs/search.svg" alt="" /></button>
+<form class='container-SearchBox' (ngSubmit)="Search(search.value)">
+    <input type='input' placeholder='Search...' #search>
+    <button class='search-button' type="submit">Search</button>
+    <button routerLink="/addpolicy" class="add-new">Add</button>
+</form>
+<div class="dropdownContainer">
+    <div class="dropdown">
+        <button class="dropbtn">{{sort=='asc'?'Ascending':'Descending'}}</button>
+        <div class="dropdown-content">
+            <div (click)="Sort('asc')">Ascending</div>
+            <div (click)="Sort('desc')">Descending</div>
         </div>
     </div>
-    <div class="sort-container">
-        <select class="" (change)="Sort(sortOption.value)" #sortOption>
-            <option value="asc"default>Ascending</option>
-            <option value="desc">Descending</option>
-        </select>
-        <button routerLink="/addemployee">Add</button>
-    </div>
-</form>
-<div class="container">
-    <button routerLink="/addpolicy">Add</button>
-    <div class="table-responsive-sm">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Banner</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Insurer</th>
-                    <th scope="col">Duration</th>
-                    <th scope="col">Total Amount</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let policy of policies; let i = index">
-                    <td>{{i+1}}</td>
-                    <td><img src="http://localhost:3000/{{policy.banner}}" alt=""></td>
-                    <td>{{policy.policyName}}</td>
-                    <td>{{policy.company.companyName}}</td>
-                    <td>{{policy.duration / 30}} Months</td>
-                    <td>{{policy.totalAmount | number: '1.0-0'}}</td>
-                    <td><span class="{{policy.status?'status-active':'status-inactive'}}">{{policy.status?'Active':'Inactive'}}</span></td>
-                    <td align="center">
-                        <button routerLink="/editpolicy" [queryParams]="{ policyID: policy.policyId }" routerLinkActive="active" class="nav-link">Edit</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
 </div>
+<table>
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Banner</th>
+            <th scope="col">Name</th>
+            <th scope="col">Insurer</th>
+            <th scope="col">Duration</th>
+            <th scope="col">Total Amount</th>
+            <th scope="col">Status</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let policy of policies; let i = index">
+            <td>{{i+1}}</td>
+            <td><img src="http://localhost:3000/{{policy.banner}}" alt=""></td>
+            <td>{{policy.policyName}}</td>
+            <td>{{policy.company.companyName}}</td>
+            <td>{{policy.duration / 30}} Months</td>
+            <td>{{policy.totalAmount | number: '1.0-0'}}</td>
+            <td><span class="{{policy.status?'status-active':'status-inactive'}}">{{policy.status?'Active':'Inactive'}}</span></td>
+            <td align="center">
+                <button routerLink="/editpolicy" [queryParams]="{ policyID: policy.policyId }" routerLinkActive="active" class="edit-button">Edit</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
 <div class="paging">
     <button class="{{i+1==currentPage?'selectedPage':''}}" *ngFor="let item of [].constructor(paging); let i = index" (click)="SwitchPage(i+1)">{{i+1}}</button>
 </div>

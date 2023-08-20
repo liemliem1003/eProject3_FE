@@ -1,53 +1,49 @@
-<form action="false" (ngSubmit)="Search(search.value)">
-    <div class="form-search">
-        <input type="text" class="inputSearch" placeholder="Search Company" #search>
-        <div class="">
-            <button class="searchBtn" type="submit"><img src="assets/imgs/search.svg" alt="" /></button>
+<form class='container-SearchBox' (ngSubmit)="Search(search.value)">
+    <input type='input' placeholder='Search...' #search>
+    <button class='search-button' type="submit">Search</button>
+    <button routerLink="/addcompany" class="add-new">Add</button>
+</form>
+<div class="dropdownContainer">
+    <div class="dropdown">
+        <button class="dropbtn">{{sort=='asc'?'Ascending':'Descending'}}</button>
+        <div class="dropdown-content">
+            <div (click)="Sort('asc')">Ascending</div>
+            <div (click)="Sort('desc')">Descending</div>
         </div>
     </div>
-    <div class="sort-container">
-        <select class="" (change)="Sort(sortOption.value)" #sortOption>
-            <option value="asc"default>Ascending</option>
-            <option value="desc">Descending</option>
-        </select>
-        <button routerLink="/addcompany">Add</button>
-    </div>
-</form>
-<div class="container">
-    <div class="table-responsive-sm">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Logo</th>
-                    <th scope="col">Company Name</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">Website</th>
-                    <th scope="col">Phone</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let company of companies; let i = index">
-                    <td>{{i+1}}</td>
-                    <td><img src="http://localhost:3000/{{company.logo}}" alt=""></td>
-                    <td>{{company.companyName}}</td>
-                    <td>{{company.address}}</td>
-                    <td>{{company.url}}</td>
-                    <td>{{company.companyPhone}}</td>
-                    <td><span
-                            class="{{company.status?'status-active':'status-inactive'}}">{{company.status?'Active':'Inactive'}}</span>
-                    </td>
-                    <td align="center">
-                        <button routerLink="/editcompany" [queryParams]="{ companyID: company.companyId }"
-                            routerLinkActive="active" class="nav-link">Edit</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
 </div>
+<table>
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Logo</th>
+            <th scope="col">Company Name</th>
+            <th scope="col">Address</th>
+            <th scope="col">Website</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Status</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let company of companies; let i = index">
+            <td>{{i+1}}</td>
+            <td><img src="http://localhost:3000/{{company.logo}}" alt=""></td>
+            <td>{{company.companyName}}</td>
+            <td>{{company.address}}</td>
+            <td>{{company.url}}</td>
+            <td>{{company.companyPhone}}</td>
+            <td><span
+                    class="{{company.status?'status-active':'status-inactive'}}">{{company.status?'Active':'Inactive'}}</span>
+            </td>
+            <td align="center">
+                <button routerLink="/editcompany" [queryParams]="{ companyID: company.companyId }"
+                    routerLinkActive="active" class="edit-button">Edit</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
 <div class="paging">
-    <button class="{{i+1==currentPage?'selectedPage':''}}" *ngFor="let item of [].constructor(paging); let i = index" (click)="SwitchPage(i+1)">{{i+1}}</button>
+    <button class="{{i+1==currentPage?'selectedPage':''}} paging-btn" *ngFor="let item of [].constructor(paging); let i = index"
+        (click)="SwitchPage(i+1)">{{i+1}}</button>
 </div>

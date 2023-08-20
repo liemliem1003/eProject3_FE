@@ -1,52 +1,64 @@
-<div class="container">
-    <h2>Edit Employee</h2>
-        <form [formGroup]="Form" (ngSubmit)="UpdateEmployee(active.checked)">
-        <div class="form-group">
+<div class="create-form">
+    <h2>CREATE NEW EMPLOYEE</h2>
+    <form [formGroup]="Form" (ngSubmit)="UpdateEmployee(active.checked)">
+        <ng-container *ngIf="imgToshow ==''; else showLogo">
+            <div class="form-item">
+                <label>Avatar</label>
+                <input type="file" accept="image/*" class="{{Form.controls.avatar.status !== 'VALID' ? 'red' :'green'}}"
+                    #logo name="file" (change)="handleImageInput($event)" formControlName="avatar">
+            </div>
+        </ng-container>
+        <ng-template #showLogo>
+            <div style="position: relative; width: 150px; height: 150px;margin: auto;">
+                <img src="{{imgToshow}}" alt="" class="showLogoImg">
+                <input type="file" accept="image/*" class="showLogo" #logo name="file"
+                    (change)="handleImageInput($event)">
+            </div>
+        </ng-template>
+        <div class="form-item">
             <label for="name">Name</label>
-            <input type="text" class="form-control {{Form.controls.name.status !== 'VALID' ? 'is-invalid' :'is-valid'}}" #name name="name" formControlName="name" placeholder="Input Employee Name">
-            <div class="{{Form.controls.name.status !== 'VALID' ? 'invalid-feedback' :'valid-feedback'}}">{{Form.controls.name.status !== 'VALID' ? "Name can't be blank" : 'Look Good!!!'}}</div>
+            <input type="text" class="form-control {{Form.controls.name.status !== 'VALID' ? 'red' :'green'}}" #name
+                name="name" formControlName="name" placeholder="Input Employee Name">
         </div>
-        <div class="form-group">
+        <div class="form-item">
             <label for="username">Username</label>
-            <input type="text" class="form-control {{Form.controls.username.status !== 'VALID' ? 'is-invalid' :'is-valid'}}" #username placeholder="Input Username" formControlName="username" readonly>
-            <div class="{{Form.controls.username.status !== 'VALID' ? 'invalid-feedback' :'valid-feedback'}}">{{Form.controls.username.status !== 'VALID' ? "Username must be in 6-12 characters" : 'Look Good!!!'}}</div>
+            <input type="text" class="form-control {{Form.controls.username.status !== 'VALID' ? 'red' :'green'}}"
+                #username placeholder="Input Username" formControlName="username" readonly>
         </div>
-        <div class="form-group">
+        <div class="form-item">
             <label for="password">Password</label>
-            <input type="password" class="form-control {{Form.controls.password.status !== 'VALID' ? 'is-invalid' :'is-valid'}}" formControlName="password" #password name="password" placeholder="Input Password">
-            <div class="{{Form.controls.password.status !== 'VALID' ? 'invalid-feedback' :'valid-feedback'}}">{{Form.controls.password.status !== 'VALID' ? "Password must be in 6-12 characters" : 'Look Good!!!'}}</div>
+            <input type="password" class="form-control {{Form.controls.password.status !== 'VALID' ? 'red' :'green'}}"
+                formControlName="password" #password name="password" placeholder="Input Password">
         </div>
-        <div class="form-group">
+        <div class="form-item">
             <label for="email">Email</label>
-            <input type="email" class="form-control {{Form.controls.email.status !== 'VALID' ? 'is-invalid' :'is-valid'}}" #email name="email" formControlName="email" placeholder="Input Email" >
-            <div class="{{Form.controls.email.status !== 'VALID' ? 'invalid-feedback' :'valid-feedback'}}">{{Form.controls.email.status !== 'VALID' ? "Email can't be blank" : 'Look Good!!!'}}</div>
+            <input type="email" class="form-control {{Form.controls.email.status !== 'VALID' ? 'red' :'green'}}" #email
+                name="email" formControlName="email" placeholder="Input Email">
         </div>
-        <div class="form-group">
+        <div class="form-item">
             <label for="phone">Phone Number</label>
-            <input type="text" class="form-control {{Form.controls.phone.status !== 'VALID' ? 'is-invalid' :'is-valid'}}" #phone name="phone" required placeholder="Input Phone" formControlName="phone">
-            <div class="{{Form.controls.phone.status !== 'VALID' ? 'invalid-feedback' :'valid-feedback'}}">{{Form.controls.phone.status !== 'VALID' ? "Phone can't be blank" : 'Look Good!!!'}}</div>
+            <input type="text" class="form-control {{Form.controls.phone.status !== 'VALID' ? 'red' :'green'}}" #phone
+                name="phone" required placeholder="Input Phone" formControlName="phone">
         </div>
-        <div class="form-group">
+        <div class="form-item">
             <label for="address">Address</label>
-            <input type="text" #address name="address" class="form-control" formControlName="password" placeholder="Input Address">
+            <input type="text" #address name="address" class="form-control" formControlName="password"
+                placeholder="Input Address">
         </div>
-        <div class="form-group">
+        <div class="form-item">
             <label for="dob">Birthday</label>
-            <input type="date" #dob name="dob" class="form-control {{Form.controls.dob.status !== 'VALID' ? 'is-invalid' :'is-valid'}}"  placeholder="Input Date of birth" formControlName="dob">
-            <div class="{{Form.controls.dob.status !== 'VALID' ? 'invalid-feedback' :'valid-feedback'}}">{{Form.controls.dob.status !== 'VALID' ? "DOB can't be blank" : 'Look Good!!!'}}</div>
+            <input type="date" #dob name="dob"
+                class="form-control {{Form.controls.dob.status !== 'VALID' ? 'red' :'green'}}"
+                placeholder="Input Date of birth" formControlName="dob">
         </div>
-        <div class="form-check">
+        <div class="form-item">
             <label class="form-check-label" for="active">Available</label>
-            <input type="checkbox" class="form-check-input" #active name="active" checked>
-        </div>
-        <div class="form-group">
-            <label for="avatar">Avatar</label>
-            <input type="file" class="form-control-file {{Form.controls.avatar.status !== 'VALID' ? 'is-invalid' :'is-valid'}}" (change)="handleImageInput($event)" #avatar name="avatar" placeholder="Select Avatar" formControlName="avatar">
-            <div class="{{Form.controls.avatar.status !== 'VALID' ? 'invalid-feedback' :'valid-feedback'}}">{{Form.controls.avatar.status !== 'VALID' ? "Avatar can't be blank" : 'Look Good!!!'}}</div>
+            <input type="checkbox" class="form-check-input" #active name="active" [checked]="data?.status">
         </div>
         <div class="btn-group">
-            <button type="submit" class="btn btn-adding">Edit Employee</button>
-            <button type="button" class="btn cancel">Cancel</button>
+            <button type="submit" class="btn btn-adding">Add Insurer</button>
+            <button type="button" class="btn cancel" (click)="Cancel()">Cancel</button>
         </div>
     </form>
+
 </div>

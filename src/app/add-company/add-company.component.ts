@@ -18,6 +18,7 @@ export class AddCompanyComponent implements OnInit {
     status: new FormControl(),
     logo: new FormControl('', [Validators.required])
   })
+  imgToshow:any = ""
   JSimg: any
 
   constructor(private apiService: ApiService, private router: Router) {
@@ -54,6 +55,7 @@ export class AddCompanyComponent implements OnInit {
 
 //
   handleImageInput(event: any) {
+    console.log(event);
     const selectedFile = event.target.files[0];
     if (selectedFile) {
       this.convertImageToBase64(selectedFile);
@@ -83,6 +85,7 @@ export class AddCompanyComponent implements OnInit {
   }
 
   processBase64Data(data: any) {
+    this.imgToshow = data
     data = data.split(",")
     this.JSimg = data[1]    
   }

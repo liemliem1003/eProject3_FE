@@ -19,6 +19,7 @@ export class AddEmployeeComponent implements OnInit {
     dob: new FormControl('', [Validators.required])
   })
   JSimg: any
+  imgToshow:any = ""
   constructor(private apiService: ApiService, private router: Router) {
 
   }
@@ -99,6 +100,7 @@ export class AddEmployeeComponent implements OnInit {
   }
 
   processBase64Data(data: any) {
+    this.imgToshow = data
     data = data.split(",")
     this.JSimg = data[1]
   }

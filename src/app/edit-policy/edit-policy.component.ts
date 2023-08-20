@@ -23,6 +23,7 @@ export class EditPolicyComponent implements OnInit {
     12,
     24
   ]
+  imgToshow:any =""
   Form = new FormGroup({
     name: new FormControl('', [Validators.required]),
     hotline: new FormControl(),
@@ -49,10 +50,8 @@ export class EditPolicyComponent implements OnInit {
         this.Form.get('name')?.setValue(this.data?.policyName);
         this.Form.get('description')?.setValue(this.data?.desciption);
         this.data.company = this.companies[data.companyId]
-        // this.Form.get('banner')?.setValue(this.data?.banner);
-        // this.Form.controls.banner = new FormControl(this.data?.banner)
         this.JSimg = this.data?.banner
-        
+        this.imgToshow = `http://localhost:3000/${this.data?.banner}`
       })
     })
   }
@@ -122,6 +121,7 @@ export class EditPolicyComponent implements OnInit {
   }
 
   processBase64Data(data: any) {
+    this.imgToshow = data
     data = data.split(",")
     this.JSimg = data[1]
   }

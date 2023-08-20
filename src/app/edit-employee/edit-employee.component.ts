@@ -10,6 +10,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms'
 })
 export class EditEmployeeComponent implements OnInit {
   data:any
+  imgToshow:any = ""
   JSimg:any
   Form = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -37,7 +38,10 @@ export class EditEmployeeComponent implements OnInit {
         this.Form.get('phone')?.setValue(data.phone);
         this.Form.get('address')?.setValue(data.address);
         this.Form.controls.avatar = new FormControl(data.avatar)
+        this.JSimg = this.data?.avatar
         this.Form.get('dob')?.setValue(data.dob.slice(0,10));
+        this.imgToshow = `http://localhost:3000/${this.data?.avatar}`
+
       })})
 
   }
@@ -52,7 +56,7 @@ export class EditEmployeeComponent implements OnInit {
           this.Form.get('email')?.value,
           this.Form.get('phone')?.value,
           this.Form.get('address')?.value,
-          this.Form.get('avatar')?.value,
+          this.JSimg,
           status
         ).then((data: any) => {
           if(data.error==null){
@@ -112,8 +116,15 @@ export class EditEmployeeComponent implements OnInit {
   }
 
   processBase64Data(data: any) {
+    this.imgToshow = data
     data = data.split(",")
     this.JSimg = data[1]
+    console.log(this.JSimg);
+    
   }
-
+  Cancel() {
+    if (window.confirm("Cancel?")) {
+      this.router.navigate(['/showemployees'])
+    }
+  }
 }

@@ -1,45 +1,46 @@
-<div class="container">
-    <h2>Create Claim</h2>
+<div class="create-form">
+    <h2>Claim</h2>
     <form [formGroup]="Form" (ngSubmit)="Create()">
-        <div class="form-group">
+        <div class="form-item">
             <label for="name">Employee Name</label>
-            <input type="text" class="form-control" #name formControlName="name" readonly>
+            <input type="text" class="" #name formControlName="name" readonly>
         </div>
-        <div class="form-group">
+        <div class="form-item">
             <label for="phone">Phone</label>
-            <input type="text" class="form-control" #phone formControlName="phone" readonly>
+            <input type="text" class="" #phone formControlName="phone" readonly>
         </div>
-        <div class="form-group">
+        <div class="form-item">
             <label for="email">Email</label>
-            <input type="text" class="form-control" #email formControlName="email" readonly>
+            <input type="text" class="" #email formControlName="email" readonly>
         </div>
-        <div class="form-group">
+        <div class="form-item">
             <label for="policyName">Policy</label>
-            <input type="text" class="form-control" #policyName formControlName="policyName" readonly>
+            <input type="text" class="" #policyName formControlName="policyName" readonly>
         </div>
-        <div class="form-group">
+        <div class="form-item">
             <label for="insurer">Insurer</label>
-            <input type="text" class="form-control" #insurer formControlName="insurer" readonly>
+            <input type="text" class="" #insurer formControlName="insurer" readonly>
         </div>
-        <div class="form-group">
+        <div class="form-item">
             <label for="description">Description</label>
-            <input type="text" class="form-control {{Form.controls.description.status !== 'VALID' ? 'is-invalid' :'is-valid'}}" formControlName="description">
-            <div class="{{Form.controls.description.status !== 'VALID' ? 'invalid-feedback' :'valid-feedback'}}">{{Form.controls.description.status !== 'VALID' ? "Description can't be blank" : 'Look Good!!!'}}</div>
-
+            <input type="text" class="{{Form.controls.description.status !== 'VALID' ? 'red' :'green'}}" formControlName="description">
         </div>
-        <div class="form-group">
+        <div class="form-item">
             <label for="appAmount">Amount</label>
-            <input type="number" class="form-control" #appAmount formControlName="appAmount">
+            <input type="number" class="{{Form.controls.appAmount.status !== 'VALID' ? 'red' :'green'}}" #appAmount formControlName="appAmount">
         </div>
-        <div class="form-group">
-            <button>Add img</button>
+        <div class="form-item">
+            <label for="logo">Upload Images</label>
+            <input type="file" (change)="handleImageInput($event)" #upload>
         </div>
-        <div class="form-group">
-            <label for="logo">Logo</label>
-            <input type="file" class="form-control-file" #logo name="file" (change)="handleImageInput($event)">
+        <div class="form-item">
+            <i>click on the image to remove</i>
+            <div *ngFor="let item of listImgClaim; let i = index" style="position: relative; width: 150px; height: 150px;margin: auto;">
+                <img src="{{item}}" alt="" class="showLogoImg" (click)="RemoveImg(i,upload)">
+            </div>
         </div>
         <div class="btn-group">
-            <button type="submit" class="btn btn-adding">Create Claim</button>
+            <button type="submit" class="btn btn-adding">Create claim</button>
             <button type="button" class="btn cancel" (click)="Cancel()">Cancel</button>
         </div>
     </form>

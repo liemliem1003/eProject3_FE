@@ -12,6 +12,7 @@ export class EditCompanyComponent implements OnInit {
   companyID: any
   JSimg:any
   data:any
+  imgToshow:any
   Form = new FormGroup({
     name: new FormControl('', [Validators.required]),
     hotline: new FormControl(),
@@ -33,6 +34,9 @@ export class EditCompanyComponent implements OnInit {
         this.Form.get('name')?.setValue(this.data?.companyName);
         this.Form.get('logo')?.setValue(this.data?.logo);
         this.JSimg = this.data?.logo
+        this.imgToshow = `http://localhost:3000/${this.data?.logo}`
+        console.log(data.logo);
+        
       })
     })
   }
@@ -94,6 +98,7 @@ export class EditCompanyComponent implements OnInit {
   }
 
   processBase64Data(data: any) {
+    this.imgToshow = data
     data = data.split(",")
     this.JSimg = data[1]
   }

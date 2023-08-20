@@ -14,7 +14,8 @@ export class ShowClaimComponent implements OnInit {
   currentPage: any = 1
   sort: any = 'asc'
   searchvalue: any = ""
-
+  startDate:any = 0
+  endDate:any = 0
   constructor(private apiService: ApiService, private router: Router) { }
 
   ngOnInit(): void {
@@ -31,6 +32,8 @@ export class ShowClaimComponent implements OnInit {
           data.claims[i].policyInfor = policyData
         })
       }
+      console.log(data);
+      
       this.data = data.claims
     })
   }

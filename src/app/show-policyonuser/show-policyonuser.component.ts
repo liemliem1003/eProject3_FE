@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../../api.service'
 import { Router } from '@angular/router';
+import { parse, format } from 'date-fns';
 
 @Component({
   selector: 'app-show-policyonuser',
@@ -40,8 +41,11 @@ export class ShowPolicyonuserComponent implements OnInit {
           })
           data[i].policyInfor = policyData
         })
+        data[i].disabled = this.ActivateClaim(data[i].startDate,data[i].endDate)
       }
       this.data = data
+      console.log(data);
+      
     })
   }
   // Date control
@@ -78,10 +82,10 @@ export class ShowPolicyonuserComponent implements OnInit {
       })
     } else {
       this.apiService.getSearchPolicyOnUser(value,this.limit, this.currentPage, this.sort).then((data: any) => {
+        console.log(data);
+
         this.paging = Math.ceil(data.TotalCount / this.limit)
         data = data.PolicyOnUsers["$values"]
-        console.log(data);
-         
         for (let i = 0; i < data.length; i++) {
           data[i].availableAmount = data[i].AvailableAmount
           data[i].endate = data[i].Endate
@@ -91,9 +95,7 @@ export class ShowPolicyonuserComponent implements OnInit {
           data[i].userId = data[i].UserId
           data[i].endDate = this.ConvertDateToInput(data[i].endDate)
           data[i].startDate = this.ConvertDateToInput(data[i].startDate)
-          debugger
           this.apiService.getEmployeeByID(data[i].userId).then((userData:any)=>{
-            debugger
             data[i].userInfor = userData
           })
           this.apiService.getPolicyByID(data[i].policyId).then((policyData:any)=>{
@@ -160,6 +162,16 @@ export class ShowPolicyonuserComponent implements OnInit {
         }
         this.data = data
       })
+    }
+  }
+  ActivateClaim(start:any,end:any){
+    const currentDate = new Date();
+    start = parse(start, 'dd-MM-yyyy', new Date());
+    end = parse(end, 'dd-MM-yyyy', new Date());
+    if(start<=currentDate && currentDate <= end){
+      return false
+    }else{
+      return true
     }
   }
 }

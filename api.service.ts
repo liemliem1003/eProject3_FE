@@ -409,4 +409,27 @@ export class ApiService {
             )
         }).catch()
     }
+    postUploadImgForClaim(claimId:any,img:any){
+        var api = `${this.apiUrl}/Claim/uploadimage`;
+        var body = {
+            claimId: claimId,
+            url: img,
+        }
+        var JSbody = JSON.stringify(body)
+        console.log(body);
+        
+        return new Promise((resolve, reject) => {
+            this.http.post(api, JSbody, this.httpOptions)
+                .subscribe((data: any) => {
+                    resolve(data);
+                },
+                    (error) => {
+                        resolve(error)
+                    })
+        }).catch()
+    }
+    getLoadIamgeByClaimID(id:any){
+        var api = `${this.apiUrl}/Claim/getimagebyclaimid?id=${id}`;
+        return this.http.get<any>(api).toPromise();
+    }
 }

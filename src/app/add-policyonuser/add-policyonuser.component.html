@@ -1,31 +1,32 @@
-<div class="container">
-    <h2>Edit Employee</h2>
-        <form (ngSubmit)="AddPolicyToUser()" [formGroup]="Form">
-        <div class="form-group" >
+<div class="create-form">
+    <h2>ADD POLICY TO USER</h2>
+    <form [formGroup]="Form" (ngSubmit)="AddPolicyToUser()">
+        <div class="form-item">
             <label for="name">Name</label>
-            <input type="text" class="form-control" #name readonly value="{{userData?.name}}">
+            <input type="text" class="" #name readonly value="{{userData?.name}}">
         </div>
-        <div class="form-group">
+        <div class="form-item">
             <label for="selectedPolicy">Select Policy</label>
-            <select class="form-control" formControlName="selectedPolicy" (change)="CalculateEndDate(startDate.value)">
-                <option *ngFor="let policy of availablePolicy; let i = index" value="{{i}}">{{policy.policyName}}</option>
+            <select class="" formControlName="selectedPolicy" (change)="CalculateEndDate(startDate.value)">
+                <option *ngFor="let policy of availablePolicy; let i = index" value="{{i}}">{{policy.policyName}}
+                </option>
             </select>
         </div>
-        <div class="form-group" >
-            <label for="name">Total Amount</label>
-            <input type="text" class="form-control" readonly value="{{totalAmount | number: '1.0-0'}}">
+        <div class="form-item">
+            <label for="">Total Amount</label>
+            <input type="text" class="" readonly value="{{totalAmount | number: '1.0-0'}}">
         </div>
-        <div class="form-group">
+        <div class="form-item">
             <label for="startDate">Start Date</label>
-            <input type="date" class="form-control {{Form.controls.startDate.status !== 'VALID' ? 'is-invalid' :'is-valid'}}" #startDate formControlName="startDate" (change)="CalculateEndDate(startDate.value)">
-            <div class="{{Form.controls.startDate.status !== 'VALID' ? 'invalid-feedback' :'valid-feedback'}}">{{Form.controls.startDate.status !== 'VALID' ? "Start date can't be blank" : 'Look Good!!!'}}</div>
+            <input type="date" class="{{Form.controls.startDate.status !== 'VALID' ? 'red' :'green'}}"
+                #startDate formControlName="startDate" (change)="CalculateEndDate(startDate.value)">
         </div>
-        <div class="form-group">
+        <div class="form-item">
             <label for="endDate">End Date</label>
-            <input type="date" class="form-control" #endDate readonly formControlName="endDate">
+            <input type="date" class="" #endDate readonly formControlName="endDate">
         </div>
         <div class="btn-group">
-            <button type="submit" class="btn btn-adding">Add Policy to User</button>
+            <button type="submit" class="btn btn-adding">Add Policy</button>
             <button type="button" class="btn cancel" (click)="Cancel()">Cancel</button>
         </div>
     </form>

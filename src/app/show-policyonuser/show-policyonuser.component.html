@@ -1,51 +1,45 @@
-<form action="false" (ngSubmit)="Search(search.value)">
-    <div class="form-search">
-        <input type="text" class="inputSearch" placeholder="Search Company" #search>
-        <div class="">
-            <button class="searchBtn" type="submit"><img src="assets/imgs/search.svg" alt="" /></button>
-        </div>
-        <div class="sort-container">
-            <select class="" (change)="Sort(sortOption.value)" #sortOption>
-                <option value="asc"default>Ascending</option>
-                <option value="desc">Descending</option>
-            </select>
-        <button routerLink="/addpolicy">Add</button>
-        </div>
-    </div>
+<form class='container-SearchBox' (ngSubmit)="Search(search.value)">
+    <input type='input' placeholder='Search...' #search>
+    <button class='search-button' type="submit">Search</button>
 </form>
-<div class="container">
-    <div class="table-responsive-sm">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Employ Name</th>
-                    <th scope="col">Insurer</th>
-                    <th scope="col">Policy Name</th>
-                    <th scope="col">Available Amount</th>
-                    <th scope="col">Start Date</th>
-                    <th scope="col">End Date</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let item of data; let i = index">
-                    <td>{{i}}</td>
-                    <td>{{item.userInfor?.name}}</td>
-                    <td>{{item.policyInfor?.companyInfor?.companyName}}</td>
-                    <td>{{item.policyInfor?.policyName}}</td>
-                    <td>{{item.avaibleAmount | number: '1.0-0'}}</td>
-                    <td>{{item.startDate}}</td>
-                    <td>{{item.endDate}}</td>
-                    <td align="center">
-                        <button routerLink="/addclaim" [queryParams]="{ policyonuserId: item.id }"
-                            routerLinkActive="active" class="nav-link">Create Claim</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+<div class="dropdownContainer">
+    <div class="dropdown">
+        <button class="dropbtn">{{sort=='asc'?'Ascending':'Descending'}}</button>
+        <div class="dropdown-content">
+            <div (click)="Sort('asc')">Ascending</div>
+            <div (click)="Sort('desc')">Descending</div>
+        </div>
     </div>
 </div>
+<table>
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Employ Name</th>
+            <th scope="col">Insurer</th>
+            <th scope="col">Policy Name</th>
+            <th scope="col">Available Amount</th>
+            <th scope="col">Start Date</th>
+            <th scope="col">End Date</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of data; let i = index">
+            <td>{{i+1}}</td>
+            <td>{{item.userInfor?.name}}</td>
+            <td>{{item.policyInfor?.companyInfor?.companyName}}</td>
+            <td>{{item.policyInfor?.policyName}}</td>
+            <td>{{item.avaibleAmount | number: '1.0-0'}}</td>
+            <td>{{item.startDate}}</td>
+            <td>{{item.endDate}}</td>
+            <td align="center">
+                <button routerLink="/addclaim" [queryParams]="{ policyonuserId: item.id }"
+                    class="edit-button" [disabled] = "item.disabled" >Claim</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
 <div class="paging">
     <button class="{{i+1==currentPage?'selectedPage':''}}" *ngFor="let item of [].constructor(paging); let i = index"
         (click)="SwitchPage(i+1)">{{i+1}}</button>

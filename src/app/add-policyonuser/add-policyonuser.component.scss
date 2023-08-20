@@ -1,42 +1,92 @@
 @import '../../assets/general.scss';
 
-.container {
-    max-width: 400px;
-    margin: auto;
-    padding: 20px;
-    background-color: #FFFFFF;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  h2 {
-    @extend .lable-header-adding;
-    margin-bottom: 20px;
-  }
-  
-  .form-group {
-    margin-bottom: 20px;
-  }
-  
-  label {
-    @extend .lable-input
+.create-form{
+  width: 390px;
+  margin: 20px auto;
+  border: 2px black solid;
+  padding-bottom: 20px;
+}
+.create-form h2{
+  text-align: center;
+  padding: 10px;
+  background-color: aqua;
+}
+.create-form .form-item{
+  margin: 10px auto;
+  width: 90%;
+}
+.create-form .form-item label{
+  margin-bottom: 2px;
+  font-weight: bold;
+  display: block;
+  color: #173cff;
+}
+.create-form .form-item input[type = text]{
+  width: 100%;
+  padding: 6px;
+}
+.create-form .form-item input[type = text]:focus{
+  border: 0;
+  outline: none;
+  box-shadow: 0 0 5pt 2pt #5b53fe;
+}
+.create-form .form-item input.green{
+  border: 0;
+  outline: none;
+  box-shadow: 0 0 5pt 2pt green;
+}
+.create-form .form-item input.red{
+  border: 0;
+  outline: none;
+  box-shadow: 0 0 1pt 1pt red;
+}
+.create-form .form-item input[type=file],
+.create-form .form-item input[type=date],
+.create-form .form-item select{
+  width: 350px;
+  max-width: 100%;
+  color: #444;
+  padding: 5px;
+  background: #fff;
+  border: 1px solid #555;
+}
+.create-form .form-item label.file {
+  font-size: 1.25em;
+  font-weight: 700;
+  color: white;
+  background-color: black;
+  display: inline-block;
+  cursor: pointer;
+}
 
-  }
-  
-  input[type="text"],
-  input[type="file"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .form-check {
-    margin-bottom: 20px;
-    display: flex;
-    padding: 0;
-  }
-  .form-check-input{
-    margin-left: 10px;
-  }
+.create-form .form-item input[type=file]:focus + label.file,
+.create-form .form-item input[type=file] + label.file:hover {
+  background-color: red;
+}
+.showLogo{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  opacity: 0;
+  top: 0;
+}
+.showLogoImg{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  top: 0;
+}
+.create-form .btn-group{
+  width: 90%;
+  margin: auto;
+}
+.create-form .btn-group button[type=submit]{
+  background: #173cff;
+  color: white;
+}
+.create-form .btn-group button[type=button]{
+  background: gray;
+}
   

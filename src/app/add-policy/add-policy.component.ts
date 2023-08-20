@@ -12,6 +12,7 @@ import { DecimalPipe } from '@angular/common';
 export class AddPolicyComponent implements OnInit {
   JSimg:any
   companies:any = []
+  imgToshow:any=""
   amountOption:any=[
     100000000,
     200000000,
@@ -19,9 +20,9 @@ export class AddPolicyComponent implements OnInit {
     1000000000
   ]
   durationOption:any =[
-    6,
-    12,
-    24
+    1,
+    2,
+    3
   ]
   Form = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -49,7 +50,7 @@ export class AddPolicyComponent implements OnInit {
           policyName,
           description,
           totalAmount,
-          duration*30,
+          duration*365,
           companyId,
           this.JSimg,
           status
@@ -101,6 +102,7 @@ export class AddPolicyComponent implements OnInit {
   }
 
   processBase64Data(data: any) {
+    this.imgToshow = data
     data = data.split(",")
     this.JSimg = data[1]
   }

@@ -1,42 +1,51 @@
-<div class="container">
-    <h2>Add new Policy</h2>
-    <form [formGroup]="Form" (ngSubmit)="Update(name.value,description.value,totalAmount.value,duration.value,companyId.value,active.checked)">
-        <div class="form-group">
+<div class="create-form">
+    <h2>CREATE NEW POLICY</h2>
+    <form [formGroup]="Form"
+        (ngSubmit)="Update(name.value,description.value,totalAmount.value,duration.value,companyId.value,status.checked)">
+        <ng-container *ngIf="imgToshow ==''; else showLogo">
+            <div class="form-item">
+                <label>Banner</label>
+                <input type="file" accept="image/*" class="{{Form.controls.banner.status !== 'VALID' ? 'red' :'green'}}"
+                    #logo name="file" (change)="handleImageInput($event)" formControlName="banner">
+            </div>
+        </ng-container>
+        <ng-template #showLogo>
+            <div style="position: relative; width: 150px; height: 150px;margin: auto;">
+                <img src="{{imgToshow}}" alt="" class="showLogoImg">
+                <input type="file" accept="image/*" class="showLogo" #logo name="file"
+                    (change)="handleImageInput($event)">
+            </div>
+        </ng-template>
+
+        <div class="form-item">
             <label for="name">Policy Name</label>
-            <input type="text" class="form-control {{Form.controls.name.status !== 'VALID' ? 'is-invalid' :'is-valid'}}" #name name="name" formControlName="name" placeholder="Input Policy name">
-            <div class="{{Form.controls.name.status !== 'VALID' ? 'invalid-feedback' :'valid-feedback'}}">{{Form.controls.name.status !== 'VALID' ? "Name can't be blank" : 'Look Good!!!'}}</div>
+            <input type="text" class="form-control {{Form.controls.name.status !== 'VALID' ? 'red' :'green'}}" #name name="name" formControlName="name" placeholder="Input Policy name">
         </div>
-        <div class="form-group">
+        <div class="form-item">
             <label for="description">Description</label>
-            <textarea class="form-control {{Form.controls.description.status !== 'VALID' ? 'is-invalid' :'is-valid'}}" #description rows="5"
-                placeholder="Type Policy description here..." formControlName="description" value="{{data?.desciption}}"></textarea>
-            <div class="{{Form.controls.description.status !== 'VALID' ? 'invalid-feedback' :'valid-feedback'}}">{{Form.controls.description.status !== 'VALID' ? "Description can't be blank" : 'Look Good!!!'}}</div>
+            <input type="text" class="form-control {{Form.controls.description.status !== 'VALID' ? 'red' :'green'}}" #description
+                placeholder="Type Policy description here..." formControlName="description" value="{{data?.desciption}}">
         </div>
-        <div class="form-group">
+        <div class="form-item">
             <label for="totalAmount">Total Amount</label>
             <input type="text" value="{{data?.totalAmount | number: '1.0-0'}}" class="form-control" #totalAmount name="totalAmount" readonly >
         </div>
-        <div class="form-group">
+        <div class="form-item">
             <label for="companyId">Select Insurer</label>
             <input type="text" value="{{data?.company?.companyName}}" class="form-control" #companyId name="duration" readonly >
         </div>
-        <div class="form-group">
+        <div class="form-item">
             <label for="duration">Select Duration</label>
             <input type="text" value="{{data?.duration/30}} Months" class="form-control" #duration name="duration" readonly >
         </div>
-        <div class="form-check">
-            <label class="form-check-label" for="active">Available</label>
-            <input type="checkbox" class="form-check-input" #active name="active" [checked]="data?.status">
+        <div class="form-item">
+            <label>Status</label>
+            <input type="checkbox" #status name="status" formControlName="status" [checked]="data?.status">
         </div>
-        <div class="form-group">
-            <label for="banner">Banner</label>
-            <input type="file" class="form-control-file {{ Form.controls.banner.invalid ? 'is-invalid' : '' }}" #banner name="file" (change)="handleImageInput($event)" formControlName="banner" placeholder="Select Banner">
-            <div class="{{Form.controls.banner.status !== 'VALID' ? 'invalid-feedback' :'valid-feedback'}}">{{Form.controls.banner.status !== 'VALID' ? "Banner can't be blank" : 'Look Good!!!'}}</div>
-        </div>
-
         <div class="btn-group">
-            <button type="submit" class="btn btn-adding">Edit Policy</button>
+            <button type="submit" class="btn btn-adding">Update Insurer</button>
             <button type="button" class="btn cancel" (click)="Cancel()">Cancel</button>
         </div>
     </form>
+
 </div>

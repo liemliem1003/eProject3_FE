@@ -18,7 +18,7 @@ export class AddPolicyonuserComponent implements OnInit {
   JSimg: any
   userData: any
   availablePolicy: any
-  totalAmount:any
+  totalAmount: any
 
   constructor(private apiService: ApiService, private router: Router, private route: ActivatedRoute) { }
 
@@ -35,8 +35,8 @@ export class AddPolicyonuserComponent implements OnInit {
     })
   }
   AddPolicyToUser() {
-    if(this.Form.status == "VALID"){
-      if(confirm("Add Policy to User")){
+    if (this.Form.status == "VALID") {
+      if (confirm("Add Policy to User")) {
         this.apiService.postCreatePolicyOnUser(
           this.availablePolicy[Number(this.Form.controls.selectedPolicy.value)].policyId,
           this.userData.userId,
@@ -44,6 +44,13 @@ export class AddPolicyonuserComponent implements OnInit {
           this.Form.controls.endDate.value,
           this.availablePolicy[Number(this.Form.controls.selectedPolicy.value)].totalAmount
         ).then((data: any) => {
+          console.log(data);
+          if (data.avaibleAmount != 0 && data.avaibleAmount != undefined) {
+            alert("Success")
+            this.router.navigate(['/showemployee'])
+          } else {
+            alert("Failed")
+          }
         })
       }
     }
@@ -70,9 +77,9 @@ export class AddPolicyonuserComponent implements OnInit {
     const formattedDate = `${day}-${month}-${year}`;
     return formattedDate
   }
-  CalculateEndDate(startDate:any) {
+  CalculateEndDate(startDate: any) {
     this.totalAmount = this.availablePolicy[Number(this.Form.controls.selectedPolicy.value)].totalAmount
-    if (startDate!="") {
+    if (startDate != "") {
       const currentDate = new Date(startDate);
       const daysToAdd = this.availablePolicy[this.Form?.controls?.selectedPolicy?.value || 0].duration;
       currentDate.setDate(currentDate.getDate() + daysToAdd);
@@ -81,8 +88,8 @@ export class AddPolicyonuserComponent implements OnInit {
     }
 
   }
-  Cancel(){
-    if(window.confirm("Cancel?")){
+  Cancel() {
+    if (window.confirm("Cancel?")) {
       this.router.navigate(['/showemployee'])
     }
   }

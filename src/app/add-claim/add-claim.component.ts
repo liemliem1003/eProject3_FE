@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, HostListener, ViewChild  } from '@angular/core';
 import { ApiService } from '../../../api.service'
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { DecimalPipe } from '@angular/common';
+import { da } from 'date-fns/locale';
 
 @Component({
   selector: 'app-add-claim',
@@ -11,13 +12,14 @@ import { DecimalPipe } from '@angular/common';
 })
 export class AddClaimComponent implements OnInit {
   JSimg: any
+  listImgClaim:any=[]
   policyOnUserData: any
   Form = new FormGroup({
     name: new FormControl(),
     phone: new FormControl(),
     email: new FormControl(),
     availableAmount: new FormControl(),
-    appAmount: new FormControl(),
+    appAmount: new FormControl('', [Validators.required]),
     policyName: new FormControl(),
     insurer: new FormControl(),
     description: new FormControl('', [Validators.required])
@@ -41,22 +43,36 @@ export class AddClaimComponent implements OnInit {
         this.Form.get('email')?.setValue(data.userInfor.email);
         this.Form.get('policyName')?.setValue(data.policyInfor.policyName);
         this.Form.get('insurer')?.setValue(data.policyInfor.companyInfor.companyName);
-        console.log(data);
         this.policyOnUserData = data
       })
-
     })
   }
   Create() {
     if (this.Form.status == "VALID") {
-      if (window.confirm("Confirm to Create new Company")) {
+      if (window.confirm("Confirm to Create new Claim")) {
         this.apiService.postCreateClaim(
           this.Form.controls.description.value,
           new Date().toISOString(),
           this.policyOnUserData.userInfor.userId,
           this.Form.controls.appAmount.value,
           this.policyOnUserData.policyInfor.policyId
-        )
+        ).then(async (data: any) => {
+          if (data.claimId != undefined) {
+            for (let i = 0; i < this.listImgClaim.length; i++) {
+              var img = this.listImgClaim[i].split(",");
+              img = img[1]
+              await this.apiService.postUploadImgForClaim(data.claimId,img).then((data)=>{
+                console.log(data);
+              })
+            }
+            alert("Create successfully")
+            this.router.navigate(['/showpolicyonuser'])
+          } else {
+            alert("Failed")
+          }
+
+        })
+        
       }
     }
 
@@ -94,7 +110,17 @@ export class AddClaimComponent implements OnInit {
   }
 
   processBase64Data(data: any) {
+    this.listImgClaim[this.listImgClaim.length] = data
     data = data.split(",")
     this.JSimg = data[1]
+  }
+  RemoveImg(id:any,upload:any){
+    if(window.confirm("Remove?"))
+    {
+      this.listImgClaim.splice(id,1)
+      upload.value = ""
+    }
+    console.log();
+    
   }
 }

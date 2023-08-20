@@ -4,8 +4,8 @@ $header: #02ff03;
 $footer: #D3E0DC;
 $fontFamily: Arial, sans-serif;
 
-.container{
-  width: 100%!important;
+.container {
+  width: 100% !important;
 }
 
 html,
@@ -14,21 +14,6 @@ body {
   padding: 0;
 }
 
-button {
-  flex: 1;
-  background-color: $buttonBackground;
-  color: $buttonText;
-  border: none;
-  padding: 10px 20px;
-  font-weight: bold;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #0047B3;
-  color: white;
-}
 
 .lable-input {
   font-weight: bold;
@@ -117,39 +102,179 @@ tr {
   text-align: center;
 }
 
-#status{
+#status {
   border: 2px;
 }
 
-//search+paging
-
-.form-search{
-  margin: 20px auto;
-  width: 50%;
-  margin: 10px auto;
-  display: flex;
-}
-.form-search .inputSearch{
-  padding: 5px;
-  width: 100%;
-  border-radius: 5px;
-}
-.form-search .inputSearch:hover{
-  box-shadow: 0 0 5pt 0.5pt lightblue;
-}
-.form-search .inputSearch:focus{
-  box-shadow: 0 0 10pt 1pt lightblue;
-}
-.paging{
+//paging
+.paging {
   text-align: center;
   padding-bottom: 20px;
 }
-.paging button{
+
+.paging button {
   margin: 0 5px;
+  --color: black;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  overflow: hidden;
+  font-size: 16px;
+  z-index: 1;
+  color: var(--color);
+  border: 2px solid var(--color);
+  border-radius: 6px;
+  position: relative;
 }
-.sort-container{
+.paging button:hover {
+  background-color: rgb(167, 162, 162);
+  color: white;
+}
+.sort-container {
   text-align: center;
 }
-.selectedPage{
-  color: red;
+
+.selectedPage {
+  background-color: var(--color);
+  color: white!important;
+}
+
+//search
+form.container-SearchBox {
+  width: 50%;
+  margin: 20px auto;
+  display: flex;
+}
+
+form.container-SearchBox input {
+  width: 100%;
+  padding-left: 10px;
+}
+
+form.container-SearchBox .search-button {
+  background-color: #173cff;
+  transition: 0.5s;
+  color: white;
+  border: 0;
+}
+form.container-SearchBox .add-new{
+  border-radius: 5px;
+  border: 0;
+  margin-left: 10px;
+  color: white;
+  background-color: #02ff03;
+  transition: 0.3s;
+}
+
+//Dropdown list
+.dropdownContainer {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropbtn {
+  padding: 4px;
+  background-color: #151418;
+  color: white;
+  font-weight: 400;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  width: 100px;
+  transition: 0.5s;
+}
+.dropbtn:hover{
+  background-color: #151418;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  transition: 0.5s;
+}
+
+.dropdown-content div {
+  display: block;
+  background-color: white;
+  color: black;
+  text-align: center;
+  width: 100%;
+  transition: 0.5s;
+}
+
+.dropdown-content div:hover {
+  background-color: #4d3c3c;
+  color: #c2c2c2;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+  cursor: pointer;
+
+}
+//button
+.edit-button {
+  --color: black;
+  display: inline-block;
+  height: 2em;
+  overflow: hidden;
+  font-size: 17px;
+  z-index: 1;
+  color: var(--color);
+  border: 2px solid var(--color);
+  border-radius: 6px;
+  position: relative;
+}
+.edit-button::before {
+  position: absolute;
+  content: "";
+  background: var(--color);
+  width: 150px;
+  height: 200px;
+  z-index: -1;
+  border-radius: 50%;
+}
+
+.edit-button:hover {
+  color: white;
+}
+
+.edit-button:before {
+  top: 100%;
+  left: 100%;
+  transition: 0.5s all;
+}
+
+.edit-button:hover::before {
+  top: -30px;
+  left: -30px;
+}
+//table show data
+table{
+  width: 90%;
+  margin: 0 auto 10px;
+}
+thead{
+  background-color: antiquewhite;
+}
+thead tr th{
+  padding: 10px 0;
+}
+tbody tr td{
+  padding: 10px 0;
+}
+tbody tr td img{
+  width: 60px;
+}
+tbody tr{
+  border-bottom: 1px white solid;
+}
+tbody tr:hover{
+  background-color: #d0cece;
 }

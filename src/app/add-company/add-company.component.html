@@ -1,35 +1,45 @@
-<div class="container">
-    <h2>Add new Insurer</h2>
-    <form [formGroup]="Form" (ngSubmit)="CreateCompany(name.value,hotline.value,address.value,website.value,status.checked)" >
-        <div class="form-group">
-            <label for="name">Insurer Name</label>
-            <input type="text" class="form-control {{Form.controls.name.status !== 'VALID' ? 'is-invalid' :'is-valid'}}" #name name="name" formControlName="name">
-            <div class="{{Form.controls.name.status !== 'VALID' ? 'invalid-feedback' :'valid-feedback'}}">{{Form.controls.name.status !== 'VALID' ? "Insurer Name can't be blank" : 'Look Good!!!'}}</div>
+<div class="create-form">
+    <h2>CREATE NEW COMPANY</h2>
+    <form [formGroup]="Form" (ngSubmit)="CreateCompany(name.value,hotline.value,address.value,website.value,status.checked)">
+        <ng-container *ngIf="imgToshow ==''; else showLogo">
+            <div class="form-item">
+                <label>Logo</label>
+                <input type="file" accept="image/*" class="{{Form.controls.logo.status !== 'VALID' ? 'red' :'green'}}" #logo name="file" (change)="handleImageInput($event)"
+                    formControlName="logo">
+            </div>
+        </ng-container>
+        <ng-template #showLogo>
+            <div style="position: relative; width: 150px; height: 150px;margin: auto;">
+                <img src="{{imgToshow}}" alt="" class="showLogoImg">
+                <input type="file" accept="image/*" class="showLogo" #logo name="file"
+                    (change)="handleImageInput($event)" >
+            </div>
+        </ng-template>
+
+        <div class="form-item">
+            <label>Company Name</label>
+            <input type="text" #name name="name" formControlName="name" class="{{Form.controls.name.status !== 'VALID' ? 'red' :'green'}}">
         </div>
-        <div class="form-group">
-            <label for="hotline">Hotline</label>
-            <input type="text" class="form-control" #hotline name="hotline" formControlName="hotline">
+        <div class="form-item">
+            <label>Hotline</label>
+            <input type="text" #hotline name="hotline" formControlName="hotline">
         </div>
-        <div class="form-group">
-            <label for="address">Address</label>
-            <input type="text" class="form-control" #address name="address" formControlName="address">
+        <div class="form-item">
+            <label>Address</label>
+            <input type="text" #address name="address" formControlName="address">
         </div>
-        <div class="form-group">
-            <label for="website">Website</label>
-            <input type="text" class="form-control" #website name="website" formControlName="website">
+        <div class="form-item">
+            <label>Website</label>
+            <input type="text" #website name="website" formControlName="website">
         </div>
-        <div class="form-check">
-            <label class="form-check-label" for="status">Available</label>
-            <input type="checkbox" class="form-check-input" #status name="status" formControlName="status">
-        </div>
-        <div class="form-group">
-            <label for="logo">Logo</label>
-            <input type="file" class="form-control-file {{ Form.controls.logo.invalid ? 'is-invalid' : '' }}" #logo name="file" (change)="handleImageInput($event)" formControlName="logo">
-            <div class="{{Form.controls.logo.status !== 'VALID' ? 'invalid-feedback' :'valid-feedback'}}">{{Form.controls.logo.status !== 'VALID' ? "Insurer Logo can't be blank" : 'Look Good!!!'}}</div>
+        <div class="form-item">
+            <label>Status</label>
+            <input type="checkbox" #status name="status" formControlName="status">
         </div>
         <div class="btn-group">
             <button type="submit" class="btn btn-adding">Add Insurer</button>
             <button type="button" class="btn cancel" (click)="Cancel()">Cancel</button>
         </div>
     </form>
+
 </div>
