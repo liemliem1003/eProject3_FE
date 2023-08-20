@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./show-company.component.scss']
 })
 export class ShowCompanyComponent implements OnInit {
+  logindetail = JSON.parse(localStorage.getItem("dataLogin") || "{}")
   companies: any
   paging: any
   limit: any = 10

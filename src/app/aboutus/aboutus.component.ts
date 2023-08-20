@@ -27,7 +27,7 @@ export class AboutusComponent implements OnInit {
       phone:'0935476003',
       email:'LinhNMTS2006016@fpt.edu.vn',
       role: 'Back-end',
-      avatar:'assets/imgs/QuocAn.jpg'
+      avatar:'assets/imgs/MauLinh.jpg'
     },{
       name:'Pham Van Man',
       phone:'0961936996',
@@ -39,7 +39,7 @@ export class AboutusComponent implements OnInit {
       phone:'0777413423',
       email:'DucHATS2010052@fpt.edu.vn',
       role: 'Back-end',
-      avatar:'assets/imgs/QuocAn.jpg'
+      avatar:'assets/imgs/AnhDuc.jpg'
     }
   ]
   ngOnInit(): void {

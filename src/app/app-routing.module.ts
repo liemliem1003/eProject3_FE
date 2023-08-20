@@ -41,15 +41,15 @@ const adminRoute: Routes = [
 
 const employeeRoute: Routes= [
   { path: 'login', component: LoginComponent },
+  { path: 'showcompany', component: ShowCompanyComponent },
+  { path: 'showpolicies', component: ShowPolicyComponent },
+  { path: 'showemployee', component: ShowEmployeeComponent },
   { path: 'addclaim', component: AddClaimComponent },
   { path: 'showclaim', component: ShowClaimComponent },
-  { path: 'editemployee', component: EditEmployeeComponent },
-  { path: 'showpolicyonuser', component: ShowPolicyonuserComponent },
   { path: 'showclaimdetail', component: ShowClaimdetailComponent },
   { path: 'aboutus', component: AboutusComponent },
-  { path: '**', redirectTo: '/showclaim', pathMatch: 'full' },
-];
-
+  { path: '**', redirectTo: '/login', pathMatch: 'full' },
+]
 const defaultRoute:Routes=
 [
   { path: 'login', component: LoginComponent },

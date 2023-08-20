@@ -1,7 +1,7 @@
 <form class='container-SearchBox' (ngSubmit)="Search(search.value)">
     <input type='input' placeholder='Search...' #search>
     <button class='search-button' type="submit">Search</button>
-    <button routerLink="/addcompany" class="add-new">Add</button>
+    <button routerLink="/addcompany" class="add-new" [disabled] = "logindetail.user?.role == 2">Add</button>
 </form>
 <div class="dropdownContainer">
     <div class="dropdown">
@@ -38,7 +38,7 @@
             </td>
             <td align="center">
                 <button routerLink="/editcompany" [queryParams]="{ companyID: company.companyId }"
-                    routerLinkActive="active" class="edit-button">Edit</button>
+                    routerLinkActive="active" class="edit-button" [disabled] = "logindetail.user?.role == 2">Edit</button>
             </td>
         </tr>
     </tbody>

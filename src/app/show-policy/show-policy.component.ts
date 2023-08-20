@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./show-policy.component.scss']
 })
 export class ShowPolicyComponent implements OnInit {
+  logindetail = JSON.parse(localStorage.getItem("dataLogin") || "{}")
   companies: any
   policies: any
   paging: any

@@ -1,7 +1,7 @@
 <form class='container-SearchBox' (ngSubmit)="Search(search.value)">
     <input type='input' placeholder='Search...' #search>
     <button class='search-button' type="submit">Search</button>
-    <button routerLink="/addpolicy" class="add-new">Add</button>
+    <button routerLink="/addpolicy" class="add-new" [disabled] = "logindetail.user?.role == 2">Add</button>
 </form>
 <div class="dropdownContainer">
     <div class="dropdown">
@@ -31,11 +31,11 @@
             <td><img src="http://localhost:3000/{{policy.banner}}" alt=""></td>
             <td>{{policy.policyName}}</td>
             <td>{{policy.company.companyName}}</td>
-            <td>{{policy.duration / 30}} Months</td>
+            <td>{{policy.duration / 365}} Year(s)</td>
             <td>{{policy.totalAmount | number: '1.0-0'}}</td>
             <td><span class="{{policy.status?'status-active':'status-inactive'}}">{{policy.status?'Active':'Inactive'}}</span></td>
             <td align="center">
-                <button routerLink="/editpolicy" [queryParams]="{ policyID: policy.policyId }" routerLinkActive="active" class="edit-button">Edit</button>
+                <button routerLink="/editpolicy" [queryParams]="{ policyID: policy.policyId }" routerLinkActive="active" class="edit-button" [disabled] = "logindetail.user?.role == 2">Edit</button>
             </td>
         </tr>
     </tbody>

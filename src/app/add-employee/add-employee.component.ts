@@ -16,7 +16,8 @@ export class AddEmployeeComponent implements OnInit {
     email: new FormControl('', [Validators.required, Validators.email]),
     phone: new FormControl('', [Validators.required]),
     avatar: new FormControl('', [Validators.required]),
-    dob: new FormControl('', [Validators.required])
+    dob: new FormControl('', [Validators.required]),
+    status: new FormControl('')
   })
   JSimg: any
   imgToshow:any = ""
