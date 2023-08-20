@@ -19,24 +19,24 @@
 
         <div class="form-item">
             <label for="name">Policy Name</label>
-            <input type="text" class="form-control {{Form.controls.name.status !== 'VALID' ? 'red' :'green'}}" #name name="name" formControlName="name" placeholder="Input Policy name">
+            <input type="text" class="{{Form.controls.name.status !== 'VALID' ? 'red' :'green'}}" #name name="name" formControlName="name" placeholder="Input Policy name">
         </div>
         <div class="form-item">
             <label for="description">Description</label>
-            <input type="text" class="form-control {{Form.controls.description.status !== 'VALID' ? 'red' :'green'}}" #description
+            <input type="text" class="{{Form.controls.description.status !== 'VALID' ? 'red' :'green'}}" #description
                 placeholder="Type Policy description here..." formControlName="description" value="{{data?.desciption}}">
         </div>
         <div class="form-item">
             <label for="totalAmount">Total Amount</label>
-            <input type="text" value="{{data?.totalAmount | number: '1.0-0'}}" class="form-control" #totalAmount name="totalAmount" readonly >
+            <input type="text" value="{{data?.totalAmount | number: '1.0-0'}}" class="" #totalAmount name="totalAmount" readonly >
         </div>
         <div class="form-item">
             <label for="companyId">Select Insurer</label>
-            <input type="text" value="{{data?.company?.companyName}}" class="form-control" #companyId name="duration" readonly >
+            <input type="text" value="{{data?.company?.companyName}}" class="" #companyId name="duration" readonly >
         </div>
         <div class="form-item">
             <label for="duration">Select Duration</label>
-            <input type="text" value="{{data?.duration/30}} Months" class="form-control" #duration name="duration" readonly >
+            <input type="text" value="{{data?.duration/365}} Year(s)" class="" #duration name="duration" readonly >
         </div>
         <div class="form-item">
             <label>Status</label>

@@ -33,7 +33,7 @@ export class AboutusComponent implements OnInit {
       phone:'0961936996',
       email:'ManPVTS2203042@fpt.edu.vn',
       role: 'Back-end',
-      avatar:'assets/imgs/QuocAn.jpg'
+      avatar:'assets/imgs/VanMan.jpg'
     },{
       name:'Hoang Anh Duc',
       phone:'0777413423',
