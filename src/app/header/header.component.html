@@ -1,45 +1,43 @@
-<!-- <ng-container *ngIf="login; else notLoggedIn">
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="#">
-            <img src="assets/imgs/logo.jpg" alt="Logo" height="30">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <div class="navbar-nav mx-auto">
+<ng-container *ngIf="login; else notLoggedIn">
+    <header class="header">
+        <nav>
+            <div class="logo">
+                <a routerLink="/showcompany">
+                    <img src="assets/imgs/logo.jpg" alt="Logo" height="50">
+                </a>
             </div>
-            <div class="navbar-nav ml-auto">
-                <button class="nav-item nav-link" (click)="Logout()">Logout</button>
+            <input type="checkbox" id="menu-toggle">
+            <label for="menu-toggle" class="menu-icon">&#9776;</label>
+            <ul class="menu">
+                <li><a routerLink="/showcompany" routerLinkActive="active">Company</a></li>
+                <li><a routerLink="/showpolicies" routerLinkActive="active">Policy</a></li>
+                <li><a routerLink="/showemployee" routerLinkActive="active">Employee</a></li>
+                <li><a routerLink="/showpolicyonuser" routerLinkActive="active">Policy on User</a></li>
+                <li><a routerLink="/showclaim" routerLinkActive="active">Claims</a></li>
+            </ul>
+            <div class="logo">
+                <div class="dropdownContainer">
+                    <div class="dropdown">
+                        <img src="http://localhost:3000/{{logindetail?.avatar}}" alt="Logo" height="50">
+                        <div class="dropdown-content">
+                            <div routerLink="/editemployee" [queryParams]="{ employeeID: logindetail?.user?.userId == undefined?logindetail?.userId:logindetail?.user?.userId }">Details</div>
+                            <div (click)="Logout()">Logout</div>
+                        </div>
+                    </div>
+                </div>
+                    
             </div>
-        </div>
-    </nav>
-</ng-container> -->
-<!-- <ng-template #notLoggedIn>
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand mx-auto" href="#">
-        </a>
-    </nav>
-</ng-template> -->
-<header class="header">
-    <nav>
-        <div class="logo">
-            <a routerLink="/showcompany">
-                <img src="assets/imgs/logo.jpg" alt="Logo" height="50">
-            </a>
-        </div>
-        <input type="checkbox" id="menu-toggle">
-        <label for="menu-toggle" class="menu-icon">&#9776;</label>
-        <ul class="menu">
-            <li><a routerLink="/showcompany" routerLinkActive="active">Company</a></li>
-            <li><a routerLink="/showpolicies" routerLinkActive="active">Policy</a></li>
-            <li><a routerLink="/showemployee" routerLinkActive="active">Employee</a></li>
-            <li><a routerLink="/showpolicyonuser" routerLinkActive="active">Policy on User</a></li>
-            <li><a routerLink="/showclaim" routerLinkActive="active">Claims</a></li>
-        </ul>
-        <div>
-            <button>Logout</button>
-        </div>
-    </nav>
-</header>
+        </nav>
+    </header>
+</ng-container>
+<ng-template #notLoggedIn>
+    <header class="header">
+        <nav>
+            <div class="logo notlogin">
+                <a routerLink="/showcompany">
+                    <img src="assets/imgs/logo.jpg" alt="Logo" height="50">
+                </a>
+            </div>
+        </nav>
+    </header>
+</ng-template>

@@ -37,11 +37,13 @@ const adminRoute: Routes = [
   { path: '**', redirectTo: '/login', pathMatch: 'full' },
 ];
 
-const employeeRout: Routes= [
+const employeeRoute: Routes= [
   { path: 'login', component: LoginComponent },
+  { path: 'addclaim', component: AddClaimComponent },
+  { path: 'showclaim', component: ShowClaimComponent },
   { path: 'editemployee', component: EditEmployeeComponent },
-  { path: 'showpolicies', component: ShowPolicyComponent },
-  { path: '**', redirectTo: '/showpolicies', pathMatch: 'full' },
+  { path: 'showclaimdetail', component: ShowClaimdetailComponent },
+  { path: '**', redirectTo: '/showclaim', pathMatch: 'full' },
 ];
 
 const defaultRoute:Routes=
@@ -56,7 +58,7 @@ if (logindetail?.user?.role==undefined) {
 }else if(logindetail?.user?.role==1){
   routes = adminRoute;
 }else if(logindetail?.user?.role==2){
-  routes = employeeRout;
+  routes = employeeRoute;
 }
 
 @NgModule({

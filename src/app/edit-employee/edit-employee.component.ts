@@ -14,7 +14,7 @@ export class EditEmployeeComponent implements OnInit {
   JSimg:any
   Form = new FormGroup({
     name: new FormControl('', [Validators.required]),
-    username: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(12)]),
+    username: new FormControl(''),
     password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(12)]),
     email: new FormControl('', [Validators.required, Validators.email]),
     phone: new FormControl('', [Validators.required]),
@@ -41,7 +41,6 @@ export class EditEmployeeComponent implements OnInit {
         this.JSimg = this.data?.avatar
         this.Form.get('dob')?.setValue(data.dob.slice(0,10));
         this.imgToshow = `http://localhost:3000/${this.data?.avatar}`
-
       })})
 
   }
